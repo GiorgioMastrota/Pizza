@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PizzeActivity" />
-        <activity android:name=".PaniniActivity" />
-        <activity android:name=".StuzzicherieActivity" />
-        <activity android:name=".BibiteActivity"></activity>
+        <activity android:name=".ActivityPizze" />
+        <activity android:name=".ActivityPanini" />
+        <activity android:name=".ActivityStuzzicherie" />
+        <activity android:name=".ActivityBibite"></activity>
     </application>
 
 </manifest>
