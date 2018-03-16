@@ -12,12 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnMR = (Button) findViewById(R.id.btnMainRiepilogo);
-
-        if(DatiSessione.prodottiScelti.getNumProdotti() == 0)
-            btnMR.setVisibility(View.GONE);
-        else
-            btnMR.setVisibility(View.VISIBLE);
+        MetodiPubblici.riepilogoInvisibile(MainActivity.this);
 
     }
 }
