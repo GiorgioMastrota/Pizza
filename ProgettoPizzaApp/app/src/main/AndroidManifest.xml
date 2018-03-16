@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PizzeActivity"></activity>
+        <activity android:name=".PizzeActivity" />
+        <activity android:name=".PaniniActivity" />
+        <activity android:name=".StuzzicherieActivity" />
+        <activity android:name=".BibiteActivity"></activity>
     </application>
 
 </manifest>
