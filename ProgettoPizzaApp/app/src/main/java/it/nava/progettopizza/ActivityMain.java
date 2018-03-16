@@ -13,7 +13,7 @@ public class ActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MetodiPubblici.riepilogoInvisibile(ActivityMain.this);
+        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityMain.this);
 
         // Passaggio ActivityPizze
         ImageButton btnPizze = (ImageButton)findViewById(R.id.imgBtnPizze);
