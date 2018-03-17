@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class ActivityMain extends AppCompatActivity {
@@ -13,7 +14,15 @@ public class ActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Gestione completa del bottone di riepilogo
         MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityMain.this);
+        Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
+        btnRiepilogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityMain.this, ActivityRiepilogo.class));
+            }
+        });
 
         // Passaggio ActivityPizze
         ImageButton btnPizze = (ImageButton)findViewById(R.id.imgBtnPizze);

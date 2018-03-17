@@ -17,9 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityPizze" />
-        <activity android:name=".ActivityPanini" />
-        <activity android:name=".ActivityStuzzicherie" />
-        <activity android:name=".ActivityBibite"></activity>
+        <activity android:name=".ActivityRiepilogo"></activity>
     </application>
 
 </manifest>
