@@ -15,8 +15,8 @@ public class ActivityPizze extends AppCompatActivity {
         setContentView(R.layout.activity_pizze);
 
         // Gestione completa del bottone di riepilogo
-        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityPizze.this);
         Button btnRiepilogo = (Button)findViewById(R.id.btnPizzeRiepilogo);
+        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityPizze.this, btnRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

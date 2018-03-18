@@ -15,8 +15,8 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Gestione completa del bottone di riepilogo
-        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityMain.this);
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
+        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

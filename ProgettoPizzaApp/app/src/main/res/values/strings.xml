@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProgettoPizza</string>
+    <string name="strRiepilogo">Riepilogo</string>
 </resources>

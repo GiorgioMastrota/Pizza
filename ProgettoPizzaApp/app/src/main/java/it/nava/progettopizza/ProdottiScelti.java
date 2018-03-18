@@ -13,23 +13,22 @@ public class ProdottiScelti {
     }
 
     // Incrementa del numero dei prodotti e rende visibile il bottone Riepilogo se i prodotti erano 0
-    public void incrementaNumProd(AppCompatActivity activity){
+    public void incrementaNumProd(AppCompatActivity activity, Button bottone){
         numProdotti++;
-        controlloBtnInvisibile(activity);
+        controlloBtnInvisibile(activity, bottone);
     }
 
     // Decrementa il numero dei prodotti e rende invisibile il bottone Riepilogo se i prodotti sono 0
-    public void decrementaNumProd(AppCompatActivity activity){
+    public void decrementaNumProd(AppCompatActivity activity, Button bottone){
         numProdotti--;
-        controlloBtnInvisibile(activity);
+        controlloBtnInvisibile(activity, bottone);
     }
 
-    public void controlloBtnInvisibile(AppCompatActivity activity){
-        Button btnMR = (Button) activity.findViewById(R.id.btnMainRiepilogo);
-        if (numProdotti == 0)
-            btnMR.setVisibility(View.GONE);
-        else
-            btnMR.setVisibility(View.VISIBLE);
+    public void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
+        if (numProdotti == 0 && bottone.getVisibility() == View.VISIBLE)
+            bottone.setVisibility(View.GONE);
+        else if (numProdotti != 0 && bottone.getVisibility() == View.GONE)
+            bottone.setVisibility(View.VISIBLE);
     }
 
     // GET E SET

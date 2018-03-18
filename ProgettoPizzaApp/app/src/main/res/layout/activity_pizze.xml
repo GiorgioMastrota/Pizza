@@ -20,6 +20,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:backgroundTint="#9dc662"
-        android:text="Riepilogo" />
+        android:text="@string/strRiepilogo" />
 
 </RelativeLayout>
