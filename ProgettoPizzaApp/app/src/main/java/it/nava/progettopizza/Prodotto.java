@@ -14,5 +14,26 @@ public class Prodotto {
         this.costo = costo;
     }
 
+    // get e set
 
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public float getCosto() {
+        return costo;
+    }
 }

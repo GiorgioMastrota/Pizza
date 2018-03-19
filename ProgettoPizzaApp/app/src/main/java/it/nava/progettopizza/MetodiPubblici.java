@@ -8,6 +8,7 @@ public class MetodiPubblici {
 
     public static ProdottiScelti prodottiScelti = new ProdottiScelti();
     public static ReteClient rete = new ReteClient();
+    public static ListeProdotti listeProdotti = new ListeProdotti();
 
     public static void richiestaMenu(){
         /* Il metodo funziona così: il server legge i dati dal database tramite php, conteggia quanti dati ha letto;
