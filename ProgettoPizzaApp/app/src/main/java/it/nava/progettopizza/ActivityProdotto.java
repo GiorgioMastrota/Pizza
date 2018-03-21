@@ -34,15 +34,19 @@ public class ActivityProdotto extends AppCompatActivity {
         switch(categoria){
             case 1: // Pizze
                 daPassare = MetodiPubblici.listeProdotti.getListaPizze();
+                setTitle("Pizze");
                 break;
             case 2: // Panini
                 daPassare = MetodiPubblici.listeProdotti.getListaPanini();
+                setTitle("Panini");
                 break;
             case 3: // Bibite
                 daPassare = MetodiPubblici.listeProdotti.getListaBibite();
+                setTitle("Bibite");
                 break;
             case 4: // Stuzzicherie
                 daPassare = MetodiPubblici.listeProdotti.getListaStuzzicherie();
+                setTitle("Stuzzicherie");
                 break;
         }
         MetodiPubblici.creaListaBottoni(this, linearInterno, 5, daPassare);

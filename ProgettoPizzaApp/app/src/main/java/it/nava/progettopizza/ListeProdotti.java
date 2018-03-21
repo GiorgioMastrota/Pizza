@@ -22,22 +22,6 @@ public class ListeProdotti {
 
     // Get e Set
 
-    public int getNumPizze(){
-        return listaPizze.size();
-    }
-
-    public int getNumPanini(){
-        return listaPanini.size();
-    }
-
-    public int getNumBibite(){
-        return listaBibite.size();
-    }
-
-    public int getNumStuzzicherie(){
-        return listaStuzzicherie.size();
-    }
-
     public String getNomePizza(int pos){
         Prodotto pizza = listaPizze.get(pos);
         return pizza.getNome();

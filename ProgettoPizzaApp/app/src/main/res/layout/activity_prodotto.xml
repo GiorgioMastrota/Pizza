@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/prodottoMain"
+    android:background="@drawable/sfondo"
     tools:context="it.nava.progettopizza.ActivityProdotto"
     android:orientation="vertical">
 

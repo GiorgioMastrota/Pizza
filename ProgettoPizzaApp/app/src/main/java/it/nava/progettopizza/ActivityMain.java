@@ -13,6 +13,7 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Pizzeria Ismail El Abiad");
 
         // Gestione completa del bottone di riepilogo
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);

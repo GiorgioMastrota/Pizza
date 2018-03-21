@@ -2,9 +2,11 @@ package it.nava.progettopizza;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -39,7 +41,12 @@ public class MetodiPubblici {
     }
 
     public static void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, List<Prodotto> lista){
+
+        Prodotto prova = new Prodotto(1, "Margherita", "Pizza", "Pomodoro, mozzarella", 3);
+        listeProdotti.listaPizze.add(prova);
+
         for (int i = 0; i < lista.size(); i++) {
+
             LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -47,24 +54,36 @@ public class MetodiPubblici {
             TextView nomeProdotto = new TextView(contesto);
             nomeProdotto.setText(lista.get(i).getNome());
             nomeProdotto.setTypeface(null, Typeface.BOLD);
-            nomeProdotto.setLayoutParams(new LinearLayout.LayoutParams(
-                    MetodiPubblici.getLarghezzaSchermo() / 5, LinearLayout.LayoutParams.WRAP_CONTENT));
+            nomeProdotto.setBackgroundColor(Color.LTGRAY);
+            nomeProdotto.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
+                    MetodiPubblici.getLarghezzaSchermo() / 4, MetodiPubblici.getAltezzaSchermo() / 13);
+            lpNome.setMargins(12, 0,0,3);
+            nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
 
             // Descrizione Prodotto, se è una bibita non serve
             if (lista != listeProdotti.listaBibite) {
                 TextView descrizione = new TextView(contesto);
                 descrizione.setText(lista.get(i).getDescrizione());
-                descrizione.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                descrizione.setBackgroundColor(Color.LTGRAY);
+                descrizione.setGravity(Gravity.CENTER);
+                LinearLayout.LayoutParams lpDesc = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, MetodiPubblici.getAltezzaSchermo() / 13, 1);
+                lpDesc.setMargins(0, 0,0,3);
+                descrizione.setLayoutParams(lpDesc);
                 ll.addView(descrizione);
             }
 
             // Prezzo prodotto
             TextView prezzoProdotto = new TextView(contesto);
             prezzoProdotto.setText(Double.toString(lista.get(i).getCosto()) + " €");
-            prezzoProdotto.setLayoutParams(new LinearLayout.LayoutParams(
-                    MetodiPubblici.getLarghezzaSchermo() / 6, LinearLayout.LayoutParams.WRAP_CONTENT));
+            prezzoProdotto.setBackgroundColor(Color.LTGRAY);
+            prezzoProdotto.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
+                    MetodiPubblici.getLarghezzaSchermo() / 6, MetodiPubblici.getAltezzaSchermo() / 13);
+            lpPrezzo.setMargins(0,0,0,3);
+            prezzoProdotto.setLayoutParams(lpPrezzo);
             ll.addView(prezzoProdotto);
 
             // Bottone
@@ -72,8 +91,10 @@ public class MetodiPubblici {
             btn.setId(i);
             btn.setMaxLines(5);
             btn.setText("Ordina");
-            btn.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            lpBtn.setMargins(0,0,3,3);
+            btn.setLayoutParams(lpBtn);
             ll.addView(btn);
 
             // Alla pressione del bottone
