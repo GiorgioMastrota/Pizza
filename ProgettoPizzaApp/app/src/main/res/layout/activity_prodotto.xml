@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/pizze"
-    tools:context="it.nava.progettopizza.ActivityPizze"
+    android:id="@+id/prodottoMain"
+    tools:context="it.nava.progettopizza.ActivityProdotto"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollPizze">
+        android:id="@+id/scrollProdotto">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnPizzeRiepilogo"
+        android:id="@+id/btnProdottoRiepilogo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

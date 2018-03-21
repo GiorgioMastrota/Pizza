@@ -24,39 +24,47 @@ public class ActivityMain extends AppCompatActivity {
             }
         });
 
-        // Passaggio ActivityPizze
+        // Passaggio Activity Pizze
         ImageButton btnPizze = (ImageButton)findViewById(R.id.imgBtnPizze);
         btnPizze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityMain.this, ActivityPizze.class));
+                Intent intentPizze = new Intent(ActivityMain.this, ActivityProdotto.class);
+                intentPizze.putExtra("categoria", 1);
+                startActivity(intentPizze);
             }
         });
 
-        // Passaggio ActivityPanini
+        // Passaggio Activity Panini
         ImageButton btnPanini = (ImageButton)findViewById(R.id.imgBtnPanini);
         btnPanini.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityMain.this, ActivityPanini.class));
+                Intent intentPanini = new Intent(ActivityMain.this, ActivityProdotto.class);
+                intentPanini.putExtra("categoria", 2);
+                startActivity(intentPanini);
             }
         });
 
-        // Passaggio ActivityStuzzicherie
-        ImageButton btnStuzzicherie = (ImageButton)findViewById(R.id.imgBtnStuzzicherie);
-        btnStuzzicherie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityMain.this, ActivityStuzzicherie.class));
-            }
-        });
-
-        // Passaggio ActivityBibite
+        // Passaggio Activity Bibite
         ImageButton btnBibite = (ImageButton)findViewById(R.id.imgBtnBibite);
         btnBibite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityMain.this, ActivityBibite.class));
+                Intent intentBibite = new Intent(ActivityMain.this, ActivityProdotto.class);
+                intentBibite.putExtra("categoria", 3);
+                startActivity(intentBibite);
+            }
+        });
+
+        // Passaggio Activity Stuzzicherie
+        ImageButton btnStuzzicherie = (ImageButton)findViewById(R.id.imgBtnStuzzicherie);
+        btnStuzzicherie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentStuzzicherie = new Intent(ActivityMain.this, ActivityProdotto.class);
+                intentStuzzicherie.putExtra("categoria", 4);
+                startActivity(intentStuzzicherie);
             }
         });
     }

@@ -7,10 +7,10 @@ public class ListeProdotti {
 
     String categorieProdotti[] = { "Pizza", "Panino", "Bibita", "Stuzzicheria" };
 
-    List<Prodotto> listaPizze = new ArrayList<Prodotto>();
-    List<Prodotto> listaPanini = new ArrayList<Prodotto>();
-    List<Prodotto> listaBibite = new ArrayList<Prodotto>();
-    List<Prodotto> listaStuzzicherie = new ArrayList<Prodotto>();
+    List<Prodotto> listaPizze = new ArrayList<Prodotto>(); // Categoria 1
+    List<Prodotto> listaPanini = new ArrayList<Prodotto>(); // Categoria 2
+    List<Prodotto> listaBibite = new ArrayList<Prodotto>(); // Categoria 3
+    List<Prodotto> listaStuzzicherie = new ArrayList<Prodotto>(); // Categoria 4
 
     public ListeProdotti(){
         letturaProdotti();

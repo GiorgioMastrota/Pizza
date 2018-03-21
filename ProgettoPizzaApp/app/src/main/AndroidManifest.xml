@@ -16,11 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityPizze" />
-        <activity android:name=".ActivityPanini" />
-        <activity android:name=".ActivityBibite" />
-        <activity android:name=".ActivityStuzzicherie" />
-        <activity android:name=".ActivityRiepilogo"></activity>
+        <activity android:name=".ActivityRiepilogo" />
+        <activity android:name=".ActivityProdotto"></activity>
     </application>
 
 </manifest>
