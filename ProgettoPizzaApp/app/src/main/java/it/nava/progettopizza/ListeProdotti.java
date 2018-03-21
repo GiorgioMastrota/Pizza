@@ -42,4 +42,20 @@ public class ListeProdotti {
         Prodotto pizza = listaPizze.get(pos);
         return pizza.getNome();
     }
+
+    public List<Prodotto> getListaPizze() {
+        return listaPizze;
+    }
+
+    public List<Prodotto> getListaPanini() {
+        return listaPanini;
+    }
+
+    public List<Prodotto> getListaBibite() {
+        return listaBibite;
+    }
+
+    public List<Prodotto> getListaStuzzicherie() {
+        return listaStuzzicherie;
+    }
 }

@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityPizze extends AppCompatActivity {
@@ -18,7 +22,7 @@ public class ActivityPizze extends AppCompatActivity {
         setContentView(R.layout.activity_pizze);
 
         // Gestione completa del bottone di riepilogo
-        Button btnRiepilogo = (Button)findViewById(R.id.btnPizzeRiepilogo);
+        Button btnRiepilogo = (Button) findViewById(R.id.btnPizzeRiepilogo);
         MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityPizze.this, btnRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,22 +31,8 @@ public class ActivityPizze extends AppCompatActivity {
             }
         });
 
-        LinearLayout ll = (LinearLayout)findViewById(R.id.pizze);
-
-        // Bottoni creati dinamicamente
-        for (int i = 0; i < 10; i++) {
-            Button button = new Button(this);
-            button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            button.setId(i);
-            button.setText("Pizza");
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(ActivityPizze.this, "Carla", Toast.LENGTH_SHORT).show();
-                }
-            });
-            button.setGravity(Gravity.CENTER);
-            ll.addView(button);
-        }
+        // Creazione bottoni dinamicamente
+        final LinearLayout linearInterno = (LinearLayout) findViewById(R.id.linearInterno);
+        MetodiPubblici.creaListaBottoni(this, linearInterno, 5, MetodiPubblici.listeProdotti.getListaPizze());
     }
 }
