@@ -4,9 +4,9 @@ public class Prodotto {
 
     int id;
     String nome, categoria, descrizione;
-    float costo;
+    double costo;
 
-    public Prodotto(int id, String nome, String categoria, String descrizione, float costo){
+    public Prodotto(int id, String nome, String categoria, String descrizione, double costo){
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
@@ -33,7 +33,7 @@ public class Prodotto {
         return descrizione;
     }
 
-    public float getCosto() {
+    public double getCosto() {
         return costo;
     }
 }

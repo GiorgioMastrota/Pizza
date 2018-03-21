@@ -2,6 +2,7 @@ package it.nava.progettopizza;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -45,14 +46,26 @@ public class MetodiPubblici {
             // Nome Prodotto
             TextView nomeProdotto = new TextView(contesto);
             nomeProdotto.setText(lista.get(i).getNome());
+            nomeProdotto.setTypeface(null, Typeface.BOLD);
             nomeProdotto.setLayoutParams(new LinearLayout.LayoutParams(
                     MetodiPubblici.getLarghezzaSchermo() / 5, LinearLayout.LayoutParams.WRAP_CONTENT));
+            ll.addView(nomeProdotto);
 
-            // Descrizione Prodotto
-            TextView descrizione = new TextView(contesto);
-            descrizione.setText(lista.get(i).getDescrizione());
-            descrizione.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            // Descrizione Prodotto, se è una bibita non serve
+            if (lista != listeProdotti.listaBibite) {
+                TextView descrizione = new TextView(contesto);
+                descrizione.setText(lista.get(i).getDescrizione());
+                descrizione.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                ll.addView(descrizione);
+            }
+
+            // Prezzo prodotto
+            TextView prezzoProdotto = new TextView(contesto);
+            prezzoProdotto.setText(Double.toString(lista.get(i).getCosto()) + " €");
+            prezzoProdotto.setLayoutParams(new LinearLayout.LayoutParams(
+                    MetodiPubblici.getLarghezzaSchermo() / 6, LinearLayout.LayoutParams.WRAP_CONTENT));
+            ll.addView(prezzoProdotto);
 
             // Bottone
             final Button btn = new Button(contesto);
@@ -61,17 +74,15 @@ public class MetodiPubblici {
             btn.setText("Ordina");
             btn.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            ll.addView(btn);
 
+            // Alla pressione del bottone
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     //
                 }
             });
 
-            // Aggiunte ai layout
-            ll.addView(nomeProdotto);
-            ll.addView(descrizione);
-            ll.addView(btn);
             layoutPrincipale.addView(ll);
         }
     }
