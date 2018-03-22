@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".ActivityRiepilogo" />
         <activity android:name=".ActivityProdotto" />
-        <activity android:name=".ActivityQuantita"></activity>
+        <activity android:name=".ActivityQuantita"
+            android:theme="@style/AppTheme.popUp">
+        </activity>
     </application>
 
 </manifest>
