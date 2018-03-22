@@ -42,13 +42,16 @@ public class MetodiPubblici {
 
     public static void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, List<Prodotto> lista){
 
-        Prodotto prova = new Prodotto(1, "Margherita", "Pizza", "Pomodoro, mozzarella", 3);
+        Prodotto prova = new Prodotto(1, "Margherita", "Pizza", "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
         listeProdotti.listaPizze.add(prova);
 
         for (int i = 0; i < lista.size(); i++) {
 
             LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
+            LinearLayout.LayoutParams lpLL = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, MetodiPubblici.getAltezzaSchermo() / 10);
+            ll.setLayoutParams(lpLL);
 
             // Nome Prodotto
             TextView nomeProdotto = new TextView(contesto);
@@ -57,7 +60,7 @@ public class MetodiPubblici {
             nomeProdotto.setBackgroundColor(Color.LTGRAY);
             nomeProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
-                    MetodiPubblici.getLarghezzaSchermo() / 4, MetodiPubblici.getAltezzaSchermo() / 13);
+                    MetodiPubblici.getLarghezzaSchermo() / 4, LinearLayout.LayoutParams.MATCH_PARENT);
             lpNome.setMargins(12, 0,0,3);
             nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
@@ -68,8 +71,9 @@ public class MetodiPubblici {
                 descrizione.setText(lista.get(i).getDescrizione());
                 descrizione.setBackgroundColor(Color.LTGRAY);
                 descrizione.setGravity(Gravity.CENTER);
+                descrizione.setTextSize(10);
                 LinearLayout.LayoutParams lpDesc = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, MetodiPubblici.getAltezzaSchermo() / 13, 1);
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
                 lpDesc.setMargins(0, 0,0,3);
                 descrizione.setLayoutParams(lpDesc);
                 ll.addView(descrizione);
@@ -77,11 +81,12 @@ public class MetodiPubblici {
 
             // Prezzo prodotto
             TextView prezzoProdotto = new TextView(contesto);
-            prezzoProdotto.setText(Double.toString(lista.get(i).getCosto()) + " €");
+            String prezzoStringa = String.format("%.2f", lista.get(i).getCosto());
+            prezzoProdotto.setText(prezzoStringa + " €");
             prezzoProdotto.setBackgroundColor(Color.LTGRAY);
             prezzoProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
-                    MetodiPubblici.getLarghezzaSchermo() / 6, MetodiPubblici.getAltezzaSchermo() / 13);
+                    MetodiPubblici.getLarghezzaSchermo() / 6, LinearLayout.LayoutParams.MATCH_PARENT);
             lpPrezzo.setMargins(0,0,0,3);
             prezzoProdotto.setLayoutParams(lpPrezzo);
             ll.addView(prezzoProdotto);
