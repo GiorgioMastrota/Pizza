@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:text="Quantità: "
     tools:context="it.nava.progettopizza.ActivityQuantita">
 
 
@@ -15,5 +16,15 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btnConferma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#62dc49"
+        android:shadowColor="#62dc49"
+        android:text="@string/strConferma" />
 </LinearLayout>

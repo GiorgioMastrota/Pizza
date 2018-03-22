@@ -3,6 +3,7 @@ package it.nava.progettopizza;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -12,7 +13,6 @@ public class ActivityQuantita extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quantita);
-        setTitle("Quantità:");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -20,7 +20,7 @@ public class ActivityQuantita extends AppCompatActivity {
         int larghezza = dm.widthPixels;
         int altezza = dm.heightPixels;
 
-        getWindow().setLayout((int)(larghezza * 0.7), (int)(altezza / 3));
+        getWindow().setLayout((int)(larghezza * 0.7), (int)(altezza / 5));
 
         EditText editQuant = (EditText)findViewById(R.id.editQuantita);
         LinearLayout.LayoutParams eqL = new LinearLayout.LayoutParams(
