@@ -1,11 +1,15 @@
 package it.nava.progettopizza;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 public class ActivityQuantita extends AppCompatActivity {
 
@@ -25,6 +29,15 @@ public class ActivityQuantita extends AppCompatActivity {
         EditText editQuant = (EditText)findViewById(R.id.editQuantita);
         LinearLayout.LayoutParams eqL = new LinearLayout.LayoutParams(
                 MetodiPubblici.getLarghezzaSchermo() / 5, LinearLayout.LayoutParams.WRAP_CONTENT);
-        // Da aggiustare
+
+        float densita = ActivityQuantita.this.getResources().getDisplayMetrics().density;
+        final PopupWindow pw = new PopupWindow(layout, (int)densita*240, (int)densita*285, true);
+        Button btnConferma = (Button)findViewById(R.id.btnConferma);
+        btnConferma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            setContentView(R.layout.);
+            }
+        });
     }
 }

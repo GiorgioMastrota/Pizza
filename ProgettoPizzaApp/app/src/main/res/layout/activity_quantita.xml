@@ -6,9 +6,19 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:text="Quantità: "
+    android:background="@color/verdeBrutto"
     tools:context="it.nava.progettopizza.ActivityQuantita">
 
+
+    <TextView
+        android:id="@+id/textQuantita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/strQuantita"
+        android:textAlignment="center"
+        android:textColor="@color/nero"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editQuantita"
@@ -16,6 +26,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/nero"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:textAlignment="center" />
@@ -24,7 +35,8 @@
         android:id="@+id/btnConferma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#62dc49"
-        android:shadowColor="#62dc49"
+        android:textColor="@color/nero"
+        android:background="@color/verdeBrutto"
         android:text="@string/strConferma" />
+
 </LinearLayout>

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ProgettoPizzaApp.iml" filepath="$PROJECT_DIR$/ProgettoPizzaApp.iml" />
+      <module fileurl="file://D:\Nava\ProgettoPizza\Pizza\ProgettoPizzaApp\ProgettoPizzaApp.iml" filepath="D:\Nava\ProgettoPizza\Pizza\ProgettoPizzaApp\ProgettoPizzaApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
