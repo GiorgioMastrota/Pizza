@@ -54,10 +54,10 @@ public class ActivityProdotto extends AppCompatActivity {
                 setTitle("Stuzzicherie");
                 break;
         }
-        creaListaBottoni(this, linearInterno, 5, daPassare);
+        creaListaBottoni(this, linearInterno, 5, daPassare, btnRiepilogo);
     }
 
-    public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, List<Prodotto> lista){
+    public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, List<Prodotto> lista, final Button riepilogo){
 
         Prodotto prova = new Prodotto(1, "Margherita", "Pizza", "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
         MetodiPubblici.listeProdotti.listaPizze.add(prova);
@@ -122,7 +122,10 @@ public class ActivityProdotto extends AppCompatActivity {
             // Alla pressione del bottone
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    startActivity(new Intent(ActivityProdotto.this, ActivityQuantita.class));
+                    Intent intentProdotto = new Intent(ActivityProdotto.this, ActivityQuantita.class);
+                    intentProdotto.putExtra("idBottone", btn.getId());
+                    MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityProdotto.this, riepilogo);
+                    startActivity(intentProdotto);
                 }
             });
 

@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class ActivityQuantita extends AppCompatActivity {
 
@@ -18,25 +22,28 @@ public class ActivityQuantita extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quantita);
 
+        final int idProdotto = getIntent().getIntExtra("idBottone", -1);
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int larghezza = dm.widthPixels;
-        int altezza = dm.heightPixels;
+        //int altezza = dm.heightPixels;
 
-        getWindow().setLayout((int)(larghezza * 0.7), (int)(altezza / 5));
+        getWindow().setLayout((int)(larghezza * 0.7), LinearLayout.LayoutParams.WRAP_CONTENT);
 
         EditText editQuant = (EditText)findViewById(R.id.editQuantita);
         LinearLayout.LayoutParams eqL = new LinearLayout.LayoutParams(
                 MetodiPubblici.getLarghezzaSchermo() / 5, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        float densita = ActivityQuantita.this.getResources().getDisplayMetrics().density;
-        final PopupWindow pw = new PopupWindow(layout, (int)densita*240, (int)densita*285, true);
         Button btnConferma = (Button)findViewById(R.id.btnConferma);
         btnConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            setContentView(R.layout.);
+                MetodiPubblici.prodottiScelti.aggiungiProdotto(idProdotto);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Prodotto aggiunto.", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
             }
         });
     }
