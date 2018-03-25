@@ -33,11 +33,9 @@ public class ProdottiScelti {
         }
     }
 
-    public void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
-        int nTotProd = pizzeScelte.size() + paniniScelti.size() + bibiteScelte.size() + stuzzicherieScelte.size();
-        if (nTotProd == 0 && bottone.getVisibility() == View.VISIBLE)
-            bottone.setVisibility(View.GONE);
-        else if (nTotProd != 0 && bottone.getVisibility() == View.GONE)
-            bottone.setVisibility(View.VISIBLE);
+    // Get
+
+    public int getGrandezzaTotale(){
+        return pizzeScelte.size() + paniniScelti.size() + bibiteScelte.size() + stuzzicherieScelte.size();
     }
 }

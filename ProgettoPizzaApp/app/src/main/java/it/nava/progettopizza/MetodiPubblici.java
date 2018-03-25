@@ -1,6 +1,7 @@
 package it.nava.progettopizza;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -39,5 +40,13 @@ public class MetodiPubblici {
         rete.Invia("richiestaMenu");
         int numStringheMenu = Integer.parseInt(rete.Ricevi());
         // Le cose ricevute dal menù devono poi essere settate nei vettori
+    }
+
+    public static void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
+        int nTotProd = prodottiScelti.getGrandezzaTotale();
+        if (nTotProd == 0 && bottone.getVisibility() == View.VISIBLE)
+            bottone.setVisibility(View.GONE);
+        else if (nTotProd != 0 && bottone.getVisibility() == View.GONE)
+            bottone.setVisibility(View.VISIBLE);
     }
 }

@@ -15,9 +15,7 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Pizzeria Ismail El Abiad");
 
-        // Gestione completa del bottone di riepilogo
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
-        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,5 +66,12 @@ public class ActivityMain extends AppCompatActivity {
                 startActivity(intentStuzzicherie);
             }
         });
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
+        Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
+        MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
     }
 }

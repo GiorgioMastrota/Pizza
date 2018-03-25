@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/prodottoMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/prodottoMain"
     android:background="@drawable/sfondo"
-    tools:context="it.nava.progettopizza.ActivityProdotto"
-    android:orientation="vertical">
+    tools:context="it.nava.progettopizza.ActivityProdotto">
 
     <ScrollView
+        android:id="@+id/scrollProdotto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollProdotto">
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/linearInterno"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/linearInterno"
             android:orientation="vertical">
 
         </LinearLayout>
@@ -33,4 +31,4 @@
         android:backgroundTint="#9dc662"
         android:text="@string/strRiepilogo" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -23,9 +23,7 @@ public class ActivityProdotto extends AppCompatActivity {
 
         int categoria = getIntent().getIntExtra("categoria", 0);
 
-        // Gestione completa del bottone di riepilogo
         Button btnRiepilogo = (Button) findViewById(R.id.btnProdottoRiepilogo);
-        MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityProdotto.this, btnRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +53,13 @@ public class ActivityProdotto extends AppCompatActivity {
                 break;
         }
         creaListaBottoni(this, linearInterno, 5, daPassare, btnRiepilogo);
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
+        Button btnRiepilogo = (Button) findViewById(R.id.btnProdottoRiepilogo);
+        MetodiPubblici.controlloBtnInvisibile(ActivityProdotto.this, btnRiepilogo);
     }
 
     public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, final List<Prodotto> lista, final Button riepilogo){
@@ -132,7 +137,6 @@ public class ActivityProdotto extends AppCompatActivity {
                     else if (lista == MetodiPubblici.listeProdotti.listaStuzzicherie)
                         intentProdotto.putExtra("idCategoria", 4);
                     intentProdotto.putExtra("idBottone", btn.getId());
-                    MetodiPubblici.prodottiScelti.controlloBtnInvisibile(ActivityProdotto.this, riepilogo);
                     startActivity(intentProdotto);
                 }
             });
