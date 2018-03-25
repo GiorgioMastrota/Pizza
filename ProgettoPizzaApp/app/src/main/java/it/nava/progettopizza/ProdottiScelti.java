@@ -9,16 +9,35 @@ import java.util.List;
 
 public class ProdottiScelti {
 
-    private List<Integer> prodottiScelti = new ArrayList<Integer>();
+    // In questi vettori salvo solo gli ID prodotto così che poi vengano prelevati i dettagli dai vettori già esistenti
 
-    public void aggiungiProdotto(int idProdotto){
-        prodottiScelti.add(idProdotto);
+    private List<Integer> pizzeScelte = new ArrayList<Integer>(); // cat 1
+    private List<Integer> paniniScelti = new ArrayList<Integer>(); // cat 2
+    private List<Integer> bibiteScelte = new ArrayList<Integer>(); // cat 3
+    private List<Integer> stuzzicherieScelte = new ArrayList<Integer>(); // cat 4
+
+    public void aggiungiProdotto(int idProdotto, int categoria){
+        switch(categoria){
+            case 1:
+                pizzeScelte.add(idProdotto);
+                break;
+            case 2:
+                paniniScelti.add(idProdotto);
+                break;
+            case 3:
+                bibiteScelte.add(idProdotto);
+                break;
+            case 4:
+                stuzzicherieScelte.add(idProdotto);
+                break;
+        }
     }
 
     public void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
-        if (prodottiScelti.size() == 0 && bottone.getVisibility() == View.VISIBLE)
+        int nTotProd = pizzeScelte.size() + paniniScelti.size() + bibiteScelte.size() + stuzzicherieScelte.size();
+        if (nTotProd == 0 && bottone.getVisibility() == View.VISIBLE)
             bottone.setVisibility(View.GONE);
-        else if (prodottiScelti.size() != 0 && bottone.getVisibility() == View.GONE)
+        else if (nTotProd != 0 && bottone.getVisibility() == View.GONE)
             bottone.setVisibility(View.VISIBLE);
     }
 }

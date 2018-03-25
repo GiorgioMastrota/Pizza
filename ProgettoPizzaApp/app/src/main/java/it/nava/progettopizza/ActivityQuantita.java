@@ -23,6 +23,7 @@ public class ActivityQuantita extends AppCompatActivity {
         setContentView(R.layout.activity_quantita);
 
         final int idProdotto = getIntent().getIntExtra("idBottone", -1);
+        final int idCategoria = getIntent().getIntExtra("idCategoria", -1);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -40,7 +41,7 @@ public class ActivityQuantita extends AppCompatActivity {
         btnConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MetodiPubblici.prodottiScelti.aggiungiProdotto(idProdotto);
+                MetodiPubblici.prodottiScelti.aggiungiProdotto(idProdotto, idCategoria);
                     Toast toast = Toast.makeText(getApplicationContext(), "Prodotto aggiunto.", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
