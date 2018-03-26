@@ -33,9 +33,84 @@ public class ProdottiScelti {
         }
     }
 
+    public void rimuoviProdotto(int idProdotto, int categoria){
+        boolean trovato = false;
+        int i = 0;
+        switch(categoria){
+            case 1:
+                do{
+                    if (pizzeScelte.get(i) == idProdotto) {
+                        pizzeScelte.remove(i);
+                        trovato = true;
+                    }
+                    i++;
+                } while (i < pizzeScelte.size() && trovato == false);
+                break;
+            case 2:
+                do{
+                    if (paniniScelti.get(i) == idProdotto) {
+                        paniniScelti.remove(i);
+                        trovato = true;
+                    }
+                    i++;
+                } while (i < paniniScelti.size() && trovato == false);
+                break;
+            case 3:
+                do{
+                    if (bibiteScelte.get(i) == idProdotto) {
+                        bibiteScelte.remove(i);
+                        trovato = true;
+                    }
+                    i++;
+                } while (i < bibiteScelte.size() && trovato == false);
+                break;
+            case 4:
+                do{
+                    if (stuzzicherieScelte.get(i) == idProdotto) {
+                        stuzzicherieScelte.remove(i);
+                        trovato = true;
+                    }
+                    i++;
+                } while (i < stuzzicherieScelte.size() && trovato == false);
+                break;
+        }
+    }
+
     // Get
 
     public int getGrandezzaTotale(){
         return pizzeScelte.size() + paniniScelti.size() + bibiteScelte.size() + stuzzicherieScelte.size();
+    }
+
+    public int getNumPizze(){
+        return pizzeScelte.size();
+    }
+
+    public int getNumPanini(){
+        return paniniScelti.size();
+    }
+
+    public int getNumBibite(){
+        return bibiteScelte.size();
+    }
+
+    public int getNumStuzzicherie(){
+        return stuzzicherieScelte.size();
+    }
+
+    public List<Integer> getPizzeScelte() {
+        return pizzeScelte;
+    }
+
+    public List<Integer> getPaniniScelti() {
+        return paniniScelti;
+    }
+
+    public List<Integer> getBibiteScelte() {
+        return bibiteScelte;
+    }
+
+    public List<Integer> getStuzzicherieScelte() {
+        return stuzzicherieScelte;
     }
 }

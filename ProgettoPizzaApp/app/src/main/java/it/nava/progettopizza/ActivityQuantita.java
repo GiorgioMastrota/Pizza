@@ -25,15 +25,9 @@ public class ActivityQuantita extends AppCompatActivity {
         final int idProdotto = getIntent().getIntExtra("idBottone", -1);
         final int idCategoria = getIntent().getIntExtra("idCategoria", -1);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        getWindow().setLayout((int)(MetodiPubblici.getLarghezzaSchermo() * 0.7), LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        int larghezza = dm.widthPixels;
-        //int altezza = dm.heightPixels;
-
-        getWindow().setLayout((int)(larghezza * 0.7), LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        EditText editQuant = (EditText)findViewById(R.id.editQuantita);
+        final EditText editQuant = (EditText)findViewById(R.id.editQuantita);
         LinearLayout.LayoutParams eqL = new LinearLayout.LayoutParams(
                 MetodiPubblici.getLarghezzaSchermo() / 5, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -41,7 +35,11 @@ public class ActivityQuantita extends AppCompatActivity {
         btnConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MetodiPubblici.prodottiScelti.aggiungiProdotto(idProdotto, idCategoria);
+                EditText quantita = (EditText)findViewById(R.id.editQuantita);
+                int quantitaScelta = Integer.parseInt(quantita.getText().toString());
+                for (int i = 0; i < quantitaScelta; i++) {
+                    MetodiPubblici.prodottiScelti.aggiungiProdotto(idProdotto, idCategoria);
+                }
                     Toast toast = Toast.makeText(getApplicationContext(), "Prodotto aggiunto.", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();

@@ -3,4 +3,5 @@
     <string name="strRiepilogo">Riepilogo</string>
     <string name="strConferma">Conferma</string>
     <string name="strQuantita">Quantità</string>
+    <string name="strGenera">Conferma e genera codice</string>
 </resources>

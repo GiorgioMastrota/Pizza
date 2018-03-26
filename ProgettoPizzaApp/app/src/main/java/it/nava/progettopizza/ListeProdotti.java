@@ -27,6 +27,41 @@ public class ListeProdotti {
         return pizza.getNome();
     }
 
+    public String getPrezzoPizza(int pos){
+        Prodotto pizza = listaPizze.get(pos);
+        return String.format("%.2f", pizza.getCosto());
+    }
+
+    public String getNomePanino(int pos){
+        Prodotto panino = listaPanini.get(pos);
+        return panino.getNome();
+    }
+
+    public String getPrezzoPanino(int pos){
+        Prodotto panino = listaPanini.get(pos);
+        return String.format("%.2f", panino.getCosto());
+    }
+
+    public String getNomeBibita(int pos){
+        Prodotto bibita = listaBibite.get(pos);
+        return bibita.getNome();
+    }
+
+    public String getPrezzoBibita(int pos){
+        Prodotto bibita = listaBibite.get(pos);
+        return String.format("%.2f", bibita.getCosto());
+    }
+
+    public String getNomeStuzzicheria(int pos){
+        Prodotto stuzzicheria = listaStuzzicherie.get(pos);
+        return stuzzicheria.getNome();
+    }
+
+    public String getPrezzoStuzzicheria(int pos){
+        Prodotto stuzzicheria = listaStuzzicherie.get(pos);
+        return String.format("%.2f", stuzzicheria.getCosto());
+    }
+
     public List<Prodotto> getListaPizze() {
         return listaPizze;
     }
