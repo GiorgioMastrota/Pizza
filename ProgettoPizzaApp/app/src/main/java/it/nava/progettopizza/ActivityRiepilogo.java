@@ -32,7 +32,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
 
     public void creaCampi(Context contesto, final int categoria, LinearLayout layout, int larghPB){
         String nomePrimoCampo = "";
-        int dimVettore = 0;
+        int dimVettore = 0, partenza = -1;
         switch(categoria){
             case 1:
                 nomePrimoCampo = "Pizze";
@@ -52,9 +52,12 @@ public class ActivityRiepilogo extends AppCompatActivity {
                 break;
         }
 
+        if (dimVettore == 0)
+            partenza = 0;
+
         String nomeProd = "", prezzo = "";
 
-        for (int i = -1; i < dimVettore; i++){
+        for (int i = partenza; i < dimVettore; i++){
             int idProd = 0;
             if (i == -1){
                 nomeProd = nomePrimoCampo;
@@ -65,78 +68,81 @@ public class ActivityRiepilogo extends AppCompatActivity {
                     case 1:
                         idProd = MetodiPubblici.prodottiScelti.getPizzeScelte().get(i);
                         nomeProd = MetodiPubblici.listeProdotti.getNomePizza(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoPizza(idProd);
+                        prezzo = MetodiPubblici.listeProdotti.getPrezzoPizza(idProd) + "€";
                         break;
                     case 2:
                         idProd = MetodiPubblici.prodottiScelti.getPaniniScelti().get(i);
                         nomeProd = MetodiPubblici.listeProdotti.getNomePanino(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoPanino(idProd);
+                        prezzo = MetodiPubblici.listeProdotti.getPrezzoPanino(idProd) + "€";
                         break;
                     case 3:
                         idProd = MetodiPubblici.prodottiScelti.getBibiteScelte().get(i);
                         nomeProd = MetodiPubblici.listeProdotti.getNomeBibita(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoBibita(idProd);
+                        prezzo = MetodiPubblici.listeProdotti.getPrezzoBibita(idProd) + "€";
                         break;
                     case 4:
                         idProd = MetodiPubblici.prodottiScelti.getStuzzicherieScelte().get(i);
                         nomeProd = MetodiPubblici.listeProdotti.getNomeStuzzicheria(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoStuzzicheria(idProd);
+                        prezzo = MetodiPubblici.listeProdotti.getPrezzoStuzzicheria(idProd) + "€";
                         break;
                 }
             }
 
             final int idProdCost = idProd;
 
-            LinearLayout ll = new LinearLayout(this);
+            LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout.LayoutParams lpLL = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.setLayoutParams(lpLL);
 
             // Nome
-            TextView nomeProdotto = new TextView(this);
+            TextView nomeProdotto = new TextView(contesto);
             nomeProdotto.setText(nomeProd);
             if (i == -1)
                 nomeProdotto.setTypeface(null, Typeface.BOLD);
-            nomeProdotto.setBackgroundColor(Color.LTGRAY);
+            nomeProdotto.setBackgroundColor(Color.WHITE);
             nomeProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
             lpNome.setMargins(12, 0, 0, 0);
             nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
 
             // Prezzo
-            TextView prezzoProdotto = new TextView(this);
+            TextView prezzoProdotto = new TextView(contesto);
             prezzoProdotto.setText(prezzo);
             if (i == -1)
                 prezzoProdotto.setTypeface(null, Typeface.BOLD);
-            prezzoProdotto.setBackgroundColor(Color.LTGRAY);
-            prezzoProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
-                    larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
+                        larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
+            prezzoProdotto.setBackgroundColor(Color.WHITE);
+            prezzoProdotto.setGravity(Gravity.CENTER);
             lpNome.setMargins(0, 0, 0, 0);
             nomeProdotto.setLayoutParams(lpPrezzo);
             ll.addView(prezzoProdotto);
 
-            // Bottone di rimozione
-            final Button btn = new Button(contesto);
-            btn.setId(idProd);
-            btn.setText("X");
-            LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            lpBtn.setMargins(0,0,3,3);
-            btn.setLayoutParams(lpBtn);
-            ll.addView(btn);
+            if (i != -1) {
+                // Bottone di rimozione
+                final Button btn = new Button(contesto);
+                btn.setId(idProd);
+                btn.setText("X");
+                LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                lpBtn.setMargins(0, 0, 3, 0);
+                btn.setLayoutParams(lpBtn);
+                ll.addView(btn);
 
-            // Alla pressione del bottone
-            btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    finish();
-                    startActivity(getIntent());
-                    MetodiPubblici.prodottiScelti.rimuoviProdotto(idProdCost, categoria);
-                }
-            });
+
+                // Alla pressione del bottone
+                btn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        finish();
+                        startActivity(getIntent());
+                        MetodiPubblici.prodottiScelti.rimuoviProdotto(idProdCost, categoria);
+                    }
+                });
+            }
 
             layout.addView(ll);
         }

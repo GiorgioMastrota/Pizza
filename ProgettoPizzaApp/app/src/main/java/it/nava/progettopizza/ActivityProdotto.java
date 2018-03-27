@@ -81,8 +81,15 @@ public class ActivityProdotto extends AppCompatActivity {
             nomeProdotto.setTypeface(null, Typeface.BOLD);
             nomeProdotto.setBackgroundColor(Color.LTGRAY);
             nomeProdotto.setGravity(Gravity.CENTER);
-            LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
-                    MetodiPubblici.getLarghezzaSchermo() / 4, LinearLayout.LayoutParams.MATCH_PARENT);
+            LinearLayout.LayoutParams lpNome;
+            if (lista != MetodiPubblici.listeProdotti.listaBibite) {
+                lpNome = new LinearLayout.LayoutParams(
+                        MetodiPubblici.getLarghezzaSchermo() / 4, LinearLayout.LayoutParams.MATCH_PARENT);
+            }
+            else{
+                lpNome = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+            }
             lpNome.setMargins(12, 0,0,3);
             nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
@@ -116,7 +123,6 @@ public class ActivityProdotto extends AppCompatActivity {
             // Bottone
             final Button btn = new Button(contesto);
             btn.setId(lista.get(i).getId());
-            btn.setMaxLines(5);
             btn.setText("Ordina");
             LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
