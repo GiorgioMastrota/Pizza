@@ -2,11 +2,11 @@ package it.nava.progettopizza;
 
 public class Prodotto {
 
-    int id;
-    String nome, categoria, descrizione;
+    int id, categoria;
+    String nome, descrizione;
     double costo;
 
-    public Prodotto(int id, String nome, String categoria, String descrizione, double costo){
+    public Prodotto(int id, String nome, int categoria, String descrizione, double costo){
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
@@ -16,7 +16,6 @@ public class Prodotto {
 
     // get e set
 
-
     public int getId() {
         return id;
     }
@@ -25,7 +24,7 @@ public class Prodotto {
         return nome;
     }
 
-    public String getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 

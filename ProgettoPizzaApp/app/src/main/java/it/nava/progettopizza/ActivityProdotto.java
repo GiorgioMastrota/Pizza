@@ -64,7 +64,7 @@ public class ActivityProdotto extends AppCompatActivity {
 
     public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, final List<Prodotto> lista, final Button riepilogo){
 
-        Prodotto prova = new Prodotto(1, "Margherita", "Pizza", "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
+        Prodotto prova = new Prodotto(1, "Margherita", 1, "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
         MetodiPubblici.listeProdotti.listaPizze.add(prova);
 
         for (int i = 0; i < lista.size(); i++) {

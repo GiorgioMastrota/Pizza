@@ -22,44 +22,77 @@ public class ListeProdotti {
 
     // Get e Set
 
-    public String getNomePizza(int pos){
-        Prodotto pizza = listaPizze.get(pos);
-        return pizza.getNome();
+    public String getNomePizza(int id){
+        for (int i = 0; i < listaPizze.size(); i++) {
+            Prodotto pizza = listaPizze.get(i);
+            if (pizza.getId() == id)
+                return pizza.getNome();
+        }
+        return null;
     }
 
-    public String getPrezzoPizza(int pos){
-        Prodotto pizza = listaPizze.get(pos);
-        return String.format("%.2f", pizza.getCosto());
+    public String getPrezzoPizza(int id){
+        for (int i = 0; i < listaPizze.size(); i++){
+            Prodotto pizza = listaPizze.get(i);
+            if (pizza.getId() == id)
+                return String.format("%.2f", pizza.getCosto());
+        }
+        return null;
     }
 
-    public String getNomePanino(int pos){
-        Prodotto panino = listaPanini.get(pos);
-        return panino.getNome();
+    public String getNomePanino(int id){
+        for (int i = 0; i < listaPanini.size(); i++) {
+            Prodotto panino = listaPanini.get(i);
+            if (panino.getId() == id)
+                return panino.getNome();
+        }
+        return null;
     }
 
-    public String getPrezzoPanino(int pos){
-        Prodotto panino = listaPanini.get(pos);
-        return String.format("%.2f", panino.getCosto());
+    public String getPrezzoPanino(int id){
+        for (int i = 0; i < listaPanini.size(); i++){
+            Prodotto panino = listaPanini.get(i);
+            if (panino.getId() == id)
+                return String.format("%.2f", panino.getCosto());
+        }
+        return null;
     }
 
-    public String getNomeBibita(int pos){
-        Prodotto bibita = listaBibite.get(pos);
-        return bibita.getNome();
+    public String getNomeBibita(int id){
+        for (int i = 0; i < listaBibite.size(); i++) {
+            Prodotto bibita = listaBibite.get(i);
+            if (bibita.getId() == id)
+                return bibita.getNome();
+        }
+        return null;
     }
 
-    public String getPrezzoBibita(int pos){
-        Prodotto bibita = listaBibite.get(pos);
-        return String.format("%.2f", bibita.getCosto());
+    public String getPrezzoBibita(int id){
+        for (int i = 0; i < listaBibite.size(); i++){
+            Prodotto bibita = listaBibite.get(i);
+            if (bibita.getId() == id)
+                return String.format("%.2f", bibita.getCosto());
+        }
+        return null;
     }
 
-    public String getNomeStuzzicheria(int pos){
-        Prodotto stuzzicheria = listaStuzzicherie.get(pos);
-        return stuzzicheria.getNome();
+
+    public String getNomeStuzzicheria(int id){
+        for (int i = 0; i < listaStuzzicherie.size(); i++) {
+            Prodotto stuzzicheria = listaStuzzicherie.get(i);
+            if (stuzzicheria.getId() == id)
+                return stuzzicheria.getNome();
+        }
+        return null;
     }
 
-    public String getPrezzoStuzzicheria(int pos){
-        Prodotto stuzzicheria = listaStuzzicherie.get(pos);
-        return String.format("%.2f", stuzzicheria.getCosto());
+    public String getPrezzoStuzzicheria(int id){
+        for (int i = 0; i < listaStuzzicherie.size(); i++){
+            Prodotto stuzzicheria = listaStuzzicherie.get(i);
+            if (stuzzicheria.getId() == id)
+                return String.format("%.2f", stuzzicheria.getCosto());
+        }
+        return null;
     }
 
     public List<Prodotto> getListaPizze() {

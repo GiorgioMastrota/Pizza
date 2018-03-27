@@ -20,16 +20,17 @@ public class ActivityRiepilogo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riepilogo);
+        setTitle("Riepilogo");
 
         final LinearLayout linearVerticale = (LinearLayout) findViewById(R.id.linearVerticale);
-        final int larghPB = MetodiPubblici.getLarghezzaSchermo() * 1 / 5;
+        final int larghPB = MetodiPubblici.getLarghezzaSchermo() / 5;
 
         for (int i = 1; i <= 4; i++)
             creaCampi(this, i, linearVerticale, larghPB);
 
     }
 
-    void creaCampi(Context contesto, final int categoria, LinearLayout layout, int larghPB){
+    public void creaCampi(Context contesto, final int categoria, LinearLayout layout, int larghPB){
         String nomePrimoCampo = "";
         int dimVettore = 0;
         switch(categoria){
