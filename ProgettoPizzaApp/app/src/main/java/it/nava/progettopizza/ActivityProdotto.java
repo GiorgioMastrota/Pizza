@@ -52,7 +52,7 @@ public class ActivityProdotto extends AppCompatActivity {
                 setTitle("Stuzzicherie");
                 break;
         }
-        creaListaBottoni(this, linearInterno, 5, daPassare, btnRiepilogo);
+        creaListaBottoni(this, linearInterno, 5, daPassare);
     }
 
     protected void onResume()
@@ -62,10 +62,14 @@ public class ActivityProdotto extends AppCompatActivity {
         MetodiPubblici.controlloBtnInvisibile(ActivityProdotto.this, btnRiepilogo);
     }
 
-    public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, final List<Prodotto> lista, final Button riepilogo){
+    public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, final List<Prodotto> lista){
 
         Prodotto prova = new Prodotto(1, "Margherita", 1, "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
         MetodiPubblici.listeProdotti.listaPizze.add(prova);
+        prova = new Prodotto(2, "Marinara", 1, "non ricordo", 3);
+        MetodiPubblici.listeProdotti.listaPizze.add(prova);
+        prova = new Prodotto(1, "Coca Cola", 3, "", 1.5);
+        MetodiPubblici.listeProdotti.listaBibite.add(prova);
 
         for (int i = 0; i < lista.size(); i++) {
 

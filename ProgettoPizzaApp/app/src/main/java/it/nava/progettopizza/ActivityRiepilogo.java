@@ -23,14 +23,21 @@ public class ActivityRiepilogo extends AppCompatActivity {
         setTitle("Riepilogo");
 
         final LinearLayout linearVerticale = (LinearLayout) findViewById(R.id.linearVerticale);
-        final int larghPB = MetodiPubblici.getLarghezzaSchermo() / 5;
+        final double larghPB = MetodiPubblici.getLarghezzaSchermo() / 5;
 
         for (int i = 1; i <= 4; i++)
             creaCampi(this, i, linearVerticale, larghPB);
 
+        // Bottone per la generazione del barcode
+        Button btnGenera = (Button)findViewById(R.id.btnGenera);
+        btnGenera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //
+            }
+        });
     }
 
-    public void creaCampi(Context contesto, final int categoria, LinearLayout layout, int larghPB){
+    public void creaCampi(Context contesto, final int categoria, LinearLayout layout, double larghPB){
         String nomePrimoCampo = "";
         int dimVettore = 0, partenza = -1;
         switch(categoria){
@@ -93,7 +100,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
             LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout.LayoutParams lpLL = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    LinearLayout.LayoutParams.MATCH_PARENT, MetodiPubblici.getLarghezzaSchermo() / 12, 1);
             ll.setLayoutParams(lpLL);
 
             // Nome
@@ -101,10 +108,9 @@ public class ActivityRiepilogo extends AppCompatActivity {
             nomeProdotto.setText(nomeProd);
             if (i == -1)
                 nomeProdotto.setTypeface(null, Typeface.BOLD);
-            nomeProdotto.setBackgroundColor(Color.WHITE);
             nomeProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
             lpNome.setMargins(12, 0, 0, 0);
             nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
@@ -114,9 +120,8 @@ public class ActivityRiepilogo extends AppCompatActivity {
             prezzoProdotto.setText(prezzo);
             if (i == -1)
                 prezzoProdotto.setTypeface(null, Typeface.BOLD);
-            LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
-                        larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
-            prezzoProdotto.setBackgroundColor(Color.WHITE);
+                    LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
+                            (int)larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
             prezzoProdotto.setGravity(Gravity.CENTER);
             lpNome.setMargins(0, 0, 0, 0);
             nomeProdotto.setLayoutParams(lpPrezzo);
@@ -133,7 +138,6 @@ public class ActivityRiepilogo extends AppCompatActivity {
                 btn.setLayoutParams(lpBtn);
                 ll.addView(btn);
 
-
                 // Alla pressione del bottone
                 btn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -143,7 +147,6 @@ public class ActivityRiepilogo extends AppCompatActivity {
                     }
                 });
             }
-
             layout.addView(ll);
         }
     }
