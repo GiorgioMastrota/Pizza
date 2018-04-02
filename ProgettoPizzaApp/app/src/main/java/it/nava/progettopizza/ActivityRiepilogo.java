@@ -32,7 +32,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
         Button btnGenera = (Button)findViewById(R.id.btnGenera);
         btnGenera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //
+                startActivity(new Intent(ActivityRiepilogo.this, ActivityBarcode.class));
             }
         });
     }

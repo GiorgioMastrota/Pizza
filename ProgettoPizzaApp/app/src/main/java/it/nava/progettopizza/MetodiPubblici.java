@@ -31,15 +31,28 @@ public class MetodiPubblici {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 
+    public static void InviaServer(String daInviare){
+        rete.Invia(daInviare);
+    }
+
+    public static String RiceviServer(){
+        return rete.Ricevi();
+    }
+
     public static void richiestaMenu(){
         /* Il metodo funziona così: il server legge i dati dal database tramite php, conteggia quanti dati ha letto;
         *  Successivamente manda al client il numero di dati letti in modo che egli possa fare un ciclo di ricezione per le stringhe del menù;
         *  il client le suddivide nei vettori (pizze, panini, bibite, stuzzicherie) in modo che nelle activity specifiche vengano mostrati
         *  i menù relativi alla categoria.
         */
-        rete.Invia("richiestaMenu");
+        InviaServer("richiestaMenu");
         int numStringheMenu = Integer.parseInt(rete.Ricevi());
         // Le cose ricevute dal menù devono poi essere settate nei vettori
+    }
+
+    public static String richiestaBarcode(){
+        InviaServer("richiestaBarcode");
+        return RiceviServer();
     }
 
     public static void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
