@@ -20,8 +20,10 @@
         <activity android:name=".ActivityProdotto" />
         <activity
             android:name=".ActivityQuantita"
-            android:theme="@style/AppThemeNoBarra.popUp"></activity>
-        <activity android:name=".ActivityBarcode"></activity>
+            android:theme="@style/AppThemeNoBarra.popUp" />
+        <activity
+            android:name=".ActivityBarcode"
+            android:theme="@style/AppThemeNoBarra"/>
     </application>
 
 </manifest>

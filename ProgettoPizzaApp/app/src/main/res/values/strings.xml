@@ -4,4 +4,6 @@
     <string name="strConferma">Conferma</string>
     <string name="strQuantita">Quantità</string>
     <string name="strGenera">Conferma e genera codice</string>
+    <string name="strBCGenerato">Vai alla cassa con il seguente codice a barre per concludere l\'ordine.</string>
+    <string name="strBtnAnnullaOrdine">Annulla ordine</string>
 </resources>

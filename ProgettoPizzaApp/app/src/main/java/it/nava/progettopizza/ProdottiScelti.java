@@ -16,8 +16,8 @@ public class ProdottiScelti {
     private List<Integer> bibiteScelte = new ArrayList<Integer>(); // cat 3
     private List<Integer> stuzzicherieScelte = new ArrayList<Integer>(); // cat 4
 
-    public void aggiungiProdotto(int idProdotto, int categoria){
-        switch(categoria){
+    public void aggiungiProdotto(int idProdotto, int categoria) {
+        switch (categoria) {
             case 1:
                 pizzeScelte.add(idProdotto);
                 break;
@@ -33,12 +33,12 @@ public class ProdottiScelti {
         }
     }
 
-    public void rimuoviProdotto(int idProdotto, int categoria){
+    public void rimuoviProdotto(int idProdotto, int categoria) {
         boolean trovato = false;
         int i = 0;
-        switch(categoria){
+        switch (categoria) {
             case 1:
-                do{
+                do {
                     if (pizzeScelte.get(i) == idProdotto) {
                         pizzeScelte.remove(i);
                         trovato = true;
@@ -47,7 +47,7 @@ public class ProdottiScelti {
                 } while (i < pizzeScelte.size() && trovato == false);
                 break;
             case 2:
-                do{
+                do {
                     if (paniniScelti.get(i) == idProdotto) {
                         paniniScelti.remove(i);
                         trovato = true;
@@ -56,7 +56,7 @@ public class ProdottiScelti {
                 } while (i < paniniScelti.size() && trovato == false);
                 break;
             case 3:
-                do{
+                do {
                     if (bibiteScelte.get(i) == idProdotto) {
                         bibiteScelte.remove(i);
                         trovato = true;
@@ -65,7 +65,7 @@ public class ProdottiScelti {
                 } while (i < bibiteScelte.size() && trovato == false);
                 break;
             case 4:
-                do{
+                do {
                     if (stuzzicherieScelte.get(i) == idProdotto) {
                         stuzzicherieScelte.remove(i);
                         trovato = true;
@@ -76,25 +76,32 @@ public class ProdottiScelti {
         }
     }
 
+    public void annullaOrdine() {
+        pizzeScelte.removeAll(pizzeScelte);
+        paniniScelti.removeAll(paniniScelti);
+        bibiteScelte.removeAll(bibiteScelte);
+        stuzzicherieScelte.removeAll(stuzzicherieScelte);
+    }
+
     // Get
 
-    public int getGrandezzaTotale(){
+    public int getGrandezzaTotale() {
         return pizzeScelte.size() + paniniScelti.size() + bibiteScelte.size() + stuzzicherieScelte.size();
     }
 
-    public int getNumPizze(){
+    public int getNumPizze() {
         return pizzeScelte.size();
     }
 
-    public int getNumPanini(){
+    public int getNumPanini() {
         return paniniScelti.size();
     }
 
-    public int getNumBibite(){
+    public int getNumBibite() {
         return bibiteScelte.size();
     }
 
-    public int getNumStuzzicherie(){
+    public int getNumStuzzicherie() {
         return stuzzicherieScelte.size();
     }
 

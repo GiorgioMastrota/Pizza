@@ -62,4 +62,8 @@ public class MetodiPubblici {
         else if (nTotProd != 0 && bottone.getVisibility() == View.GONE)
             bottone.setVisibility(View.VISIBLE);
     }
+
+    public static void annullaOrdine(){
+        prodottiScelti.annullaOrdine();
+    }
 }
