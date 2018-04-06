@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -100,7 +101,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
             LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout.LayoutParams lpLL = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, MetodiPubblici.getLarghezzaSchermo() / 12, 1);
+                    LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
             ll.setLayoutParams(lpLL);
 
             // Nome

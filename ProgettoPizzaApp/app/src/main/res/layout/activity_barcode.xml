@@ -7,8 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/lbPrincipale"
+    android:gravity="center"
     tools:context="it.nava.progettopizza.ActivityBarcode">
 
-
+    <ImageView
+        android:id="@+id/imgBarcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
