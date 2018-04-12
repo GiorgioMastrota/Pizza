@@ -41,7 +41,7 @@ public class ActivityBarcode extends AppCompatActivity {
         Button btnAnnullaOrdine = (Button)findViewById(R.id.btnAnnullaOrdine);
         btnAnnullaOrdine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                MetodiPubblici.annullaOrdine();
+                ProdottiScelti.annullaOrdine();
                 // MANCA mandare al server che l'ordine è stato annullato
                 startActivity(new Intent(ActivityBarcode.this, ActivityMain.class));
             }

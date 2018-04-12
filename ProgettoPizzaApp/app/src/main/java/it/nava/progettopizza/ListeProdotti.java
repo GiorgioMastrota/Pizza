@@ -5,12 +5,12 @@ import java.util.List;
 
 public class ListeProdotti {
 
-    String categorieProdotti[] = { "Pizza", "Panino", "Bibita", "Stuzzicheria" };
+    private static String categorieProdotti[] = { "Pizza", "Panino", "Bibita", "Stuzzicheria" };
 
-    List<Prodotto> listaPizze = new ArrayList<Prodotto>(); // Categoria 1
-    List<Prodotto> listaPanini = new ArrayList<Prodotto>(); // Categoria 2
-    List<Prodotto> listaBibite = new ArrayList<Prodotto>(); // Categoria 3
-    List<Prodotto> listaStuzzicherie = new ArrayList<Prodotto>(); // Categoria 4
+    private static List<Prodotto> listaPizze = new ArrayList<Prodotto>(); // Categoria 1
+    private static List<Prodotto> listaPanini = new ArrayList<Prodotto>(); // Categoria 2
+    private static List<Prodotto> listaBibite = new ArrayList<Prodotto>(); // Categoria 3
+    private static List<Prodotto> listaStuzzicherie = new ArrayList<Prodotto>(); // Categoria 4
 
     public ListeProdotti(){
         letturaProdotti();
@@ -20,9 +20,26 @@ public class ListeProdotti {
         //MetodiPubblici.richiestaMenu();
     }
 
-    // Get e Set
+    // Aggiunte prodotti
 
-    public String getNomePizza(int id){
+    public static void aggiungiPizza(Prodotto prodotto){
+        listaPizze.add(prodotto);
+    }
+
+    public static void aggiungiPanino(Prodotto prodotto){
+        listaPanini.add(prodotto);
+    }
+    public static void aggiungiBibita(Prodotto prodotto){
+        listaBibite.add(prodotto);
+    }
+    public static void aggiungiStuzzicheria(Prodotto prodotto){
+        listaStuzzicherie.add(prodotto);
+    }
+
+
+    // Get
+
+    public static String getNomePizza(int id){
         for (int i = 0; i < listaPizze.size(); i++) {
             Prodotto pizza = listaPizze.get(i);
             if (pizza.getId() == id)
@@ -31,7 +48,7 @@ public class ListeProdotti {
         return null;
     }
 
-    public String getPrezzoPizza(int id){
+    public static String getPrezzoPizza(int id){
         for (int i = 0; i < listaPizze.size(); i++){
             Prodotto pizza = listaPizze.get(i);
             if (pizza.getId() == id)
@@ -40,7 +57,7 @@ public class ListeProdotti {
         return null;
     }
 
-    public String getNomePanino(int id){
+    public static String getNomePanino(int id){
         for (int i = 0; i < listaPanini.size(); i++) {
             Prodotto panino = listaPanini.get(i);
             if (panino.getId() == id)
@@ -49,7 +66,7 @@ public class ListeProdotti {
         return null;
     }
 
-    public String getPrezzoPanino(int id){
+    public static String getPrezzoPanino(int id){
         for (int i = 0; i < listaPanini.size(); i++){
             Prodotto panino = listaPanini.get(i);
             if (panino.getId() == id)
@@ -58,7 +75,7 @@ public class ListeProdotti {
         return null;
     }
 
-    public String getNomeBibita(int id){
+    public static String getNomeBibita(int id){
         for (int i = 0; i < listaBibite.size(); i++) {
             Prodotto bibita = listaBibite.get(i);
             if (bibita.getId() == id)
@@ -67,7 +84,7 @@ public class ListeProdotti {
         return null;
     }
 
-    public String getPrezzoBibita(int id){
+    public static String getPrezzoBibita(int id){
         for (int i = 0; i < listaBibite.size(); i++){
             Prodotto bibita = listaBibite.get(i);
             if (bibita.getId() == id)
@@ -77,7 +94,7 @@ public class ListeProdotti {
     }
 
 
-    public String getNomeStuzzicheria(int id){
+    public static String getNomeStuzzicheria(int id){
         for (int i = 0; i < listaStuzzicherie.size(); i++) {
             Prodotto stuzzicheria = listaStuzzicherie.get(i);
             if (stuzzicheria.getId() == id)
@@ -86,7 +103,7 @@ public class ListeProdotti {
         return null;
     }
 
-    public String getPrezzoStuzzicheria(int id){
+    public static String getPrezzoStuzzicheria(int id){
         for (int i = 0; i < listaStuzzicherie.size(); i++){
             Prodotto stuzzicheria = listaStuzzicherie.get(i);
             if (stuzzicheria.getId() == id)
@@ -95,19 +112,19 @@ public class ListeProdotti {
         return null;
     }
 
-    public List<Prodotto> getListaPizze() {
+    public static List<Prodotto> getListaPizze() {
         return listaPizze;
     }
 
-    public List<Prodotto> getListaPanini() {
+    public static List<Prodotto> getListaPanini() {
         return listaPanini;
     }
 
-    public List<Prodotto> getListaBibite() {
+    public static List<Prodotto> getListaBibite() {
         return listaBibite;
     }
 
-    public List<Prodotto> getListaStuzzicherie() {
+    public static List<Prodotto> getListaStuzzicherie() {
         return listaStuzzicherie;
     }
 }

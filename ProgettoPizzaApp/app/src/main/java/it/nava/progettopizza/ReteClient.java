@@ -16,7 +16,7 @@ public class ReteClient {
     public ReteClient(){
         try {
             portaServer = 3333;
-            IPServer = InetAddress.getByName("192.168.71.1");
+            IPServer = InetAddress.getByName("172.16.102.116");
             clientSocket = new DatagramSocket();
         } catch (SocketException | UnknownHostException ex) {
             System.out.println("Errore nell'inizializzazione dei valori del client.");                               
@@ -24,7 +24,7 @@ public class ReteClient {
         }
     }
     
-    public boolean Invia(String messaggio) {
+    public static boolean Invia(String messaggio) {
         if (clientSocket == null) {
             try {
                 clientSocket = new DatagramSocket();
@@ -43,7 +43,7 @@ public class ReteClient {
         return true;
     }
 
-    public String Ricevi() {
+    public static String Ricevi() {
         String ricevuto = "";
         try {
             DatagramPacket pacchettoRicezione // Creo il pacchetto per la ricezione

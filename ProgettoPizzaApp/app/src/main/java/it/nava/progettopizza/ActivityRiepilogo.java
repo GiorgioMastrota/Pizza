@@ -44,19 +44,19 @@ public class ActivityRiepilogo extends AppCompatActivity {
         switch(categoria){
             case 1:
                 nomePrimoCampo = "Pizze";
-                dimVettore = MetodiPubblici.prodottiScelti.getNumPizze();
+                dimVettore = ProdottiScelti.getNumPizze();
                 break;
             case 2:
                 nomePrimoCampo = "Panini";
-                dimVettore = MetodiPubblici.prodottiScelti.getNumPanini();
+                dimVettore = ProdottiScelti.getNumPanini();
                 break;
             case 3:
                 nomePrimoCampo = "Bibite";
-                dimVettore = MetodiPubblici.prodottiScelti.getNumBibite();
+                dimVettore = ProdottiScelti.getNumBibite();
                 break;
             case 4:
                 nomePrimoCampo = "Stuzzicherie";
-                dimVettore = MetodiPubblici.prodottiScelti.getNumStuzzicherie();
+                dimVettore = ProdottiScelti.getNumStuzzicherie();
                 break;
         }
 
@@ -74,24 +74,24 @@ public class ActivityRiepilogo extends AppCompatActivity {
             else{
                 switch(categoria) {
                     case 1:
-                        idProd = MetodiPubblici.prodottiScelti.getPizzeScelte().get(i);
-                        nomeProd = MetodiPubblici.listeProdotti.getNomePizza(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoPizza(idProd) + "€";
+                        idProd = ProdottiScelti.getPizzeScelte().get(i);
+                        nomeProd = ListeProdotti.getNomePizza(idProd);
+                        prezzo = ListeProdotti.getPrezzoPizza(idProd) + "€";
                         break;
                     case 2:
-                        idProd = MetodiPubblici.prodottiScelti.getPaniniScelti().get(i);
-                        nomeProd = MetodiPubblici.listeProdotti.getNomePanino(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoPanino(idProd) + "€";
+                        idProd = ProdottiScelti.getPaniniScelti().get(i);
+                        nomeProd =ListeProdotti.getNomePanino(idProd);
+                        prezzo = ListeProdotti.getPrezzoPanino(idProd) + "€";
                         break;
                     case 3:
-                        idProd = MetodiPubblici.prodottiScelti.getBibiteScelte().get(i);
-                        nomeProd = MetodiPubblici.listeProdotti.getNomeBibita(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoBibita(idProd) + "€";
+                        idProd = ProdottiScelti.getBibiteScelte().get(i);
+                        nomeProd = ListeProdotti.getNomeBibita(idProd);
+                        prezzo = ListeProdotti.getPrezzoBibita(idProd) + "€";
                         break;
                     case 4:
-                        idProd = MetodiPubblici.prodottiScelti.getStuzzicherieScelte().get(i);
-                        nomeProd = MetodiPubblici.listeProdotti.getNomeStuzzicheria(idProd);
-                        prezzo = MetodiPubblici.listeProdotti.getPrezzoStuzzicheria(idProd) + "€";
+                        idProd = ProdottiScelti.getStuzzicherieScelte().get(i);
+                        nomeProd = ListeProdotti.getNomeStuzzicheria(idProd);
+                        prezzo = ListeProdotti.getPrezzoStuzzicheria(idProd) + "€";
                         break;
                 }
             }
@@ -144,7 +144,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
                     public void onClick(View v) {
                         finish();
                         startActivity(getIntent());
-                        MetodiPubblici.prodottiScelti.rimuoviProdotto(idProdCost, categoria);
+                        ProdottiScelti.rimuoviProdotto(idProdCost, categoria);
                     }
                 });
             }

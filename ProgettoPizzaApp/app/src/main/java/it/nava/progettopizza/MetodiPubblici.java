@@ -18,10 +18,6 @@ import java.util.List;
 
 public class MetodiPubblici {
 
-    public static ProdottiScelti prodottiScelti = new ProdottiScelti();
-    public static ReteClient rete = new ReteClient();
-    public static ListeProdotti listeProdotti = new ListeProdotti();
-
     // Dimensioni schermo
     public static int getLarghezzaSchermo() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -32,11 +28,11 @@ public class MetodiPubblici {
     }
 
     public static void InviaServer(String daInviare){
-        rete.Invia(daInviare);
+        ReteClient.Invia(daInviare);
     }
 
     public static String RiceviServer(){
-        return rete.Ricevi();
+        return ReteClient.Ricevi();
     }
 
     public static void richiestaMenu(){
@@ -46,7 +42,7 @@ public class MetodiPubblici {
         *  i menù relativi alla categoria.
         */
         InviaServer("richiestaMenu");
-        int numStringheMenu = Integer.parseInt(rete.Ricevi());
+        int numStringheMenu = Integer.parseInt(ReteClient.Ricevi());
         // Le cose ricevute dal menù devono poi essere settate nei vettori
     }
 
@@ -56,14 +52,10 @@ public class MetodiPubblici {
     }
 
     public static void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
-        int nTotProd = prodottiScelti.getGrandezzaTotale();
+        int nTotProd = ProdottiScelti.getGrandezzaTotale();
         if (nTotProd == 0 && bottone.getVisibility() == View.VISIBLE)
             bottone.setVisibility(View.GONE);
         else if (nTotProd != 0 && bottone.getVisibility() == View.GONE)
             bottone.setVisibility(View.VISIBLE);
-    }
-
-    public static void annullaOrdine(){
-        prodottiScelti.annullaOrdine();
     }
 }

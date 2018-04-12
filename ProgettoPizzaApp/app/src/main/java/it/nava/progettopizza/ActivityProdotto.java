@@ -36,19 +36,19 @@ public class ActivityProdotto extends AppCompatActivity {
         List<Prodotto> daPassare = null;
         switch(categoria){
             case 1: // Pizze
-                daPassare = MetodiPubblici.listeProdotti.getListaPizze();
+                daPassare = ListeProdotti.getListaPizze();
                 setTitle("Pizze");
                 break;
             case 2: // Panini
-                daPassare = MetodiPubblici.listeProdotti.getListaPanini();
+                daPassare = ListeProdotti.getListaPanini();
                 setTitle("Panini");
                 break;
             case 3: // Bibite
-                daPassare = MetodiPubblici.listeProdotti.getListaBibite();
+                daPassare = ListeProdotti.getListaBibite();
                 setTitle("Bibite");
                 break;
             case 4: // Stuzzicherie
-                daPassare = MetodiPubblici.listeProdotti.getListaStuzzicherie();
+                daPassare = ListeProdotti.getListaStuzzicherie();
                 setTitle("Stuzzicherie");
                 break;
         }
@@ -65,11 +65,11 @@ public class ActivityProdotto extends AppCompatActivity {
     public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, final List<Prodotto> lista){
 
         Prodotto prova = new Prodotto(1, "Margherita", 1, "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
-        MetodiPubblici.listeProdotti.listaPizze.add(prova);
+        ListeProdotti.aggiungiPizza(prova);
         prova = new Prodotto(2, "Marinara", 1, "non ricordo", 3);
-        MetodiPubblici.listeProdotti.listaPizze.add(prova);
+        ListeProdotti.aggiungiPizza(prova);
         prova = new Prodotto(1, "Coca Cola", 3, "", 1.5);
-        MetodiPubblici.listeProdotti.listaBibite.add(prova);
+        ListeProdotti.aggiungiBibita(prova);
 
         for (int i = 0; i < lista.size(); i++) {
 
@@ -86,7 +86,7 @@ public class ActivityProdotto extends AppCompatActivity {
             nomeProdotto.setBackgroundColor(Color.LTGRAY);
             nomeProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpNome;
-            if (lista != MetodiPubblici.listeProdotti.listaBibite) {
+            if (lista != ListeProdotti.getListaBibite()) {
                 lpNome = new LinearLayout.LayoutParams(
                         MetodiPubblici.getLarghezzaSchermo() / 4, LinearLayout.LayoutParams.MATCH_PARENT);
             }
@@ -99,7 +99,7 @@ public class ActivityProdotto extends AppCompatActivity {
             ll.addView(nomeProdotto);
 
             // Descrizione Prodotto, se è una bibita non serve
-            if (lista != MetodiPubblici.listeProdotti.listaBibite) {
+            if (lista != ListeProdotti.getListaBibite()) {
                 TextView descrizione = new TextView(contesto);
                 descrizione.setText(lista.get(i).getDescrizione());
                 descrizione.setBackgroundColor(Color.LTGRAY);
@@ -138,13 +138,13 @@ public class ActivityProdotto extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intentProdotto = new Intent(ActivityProdotto.this, ActivityQuantita.class);
-                    if (lista == MetodiPubblici.listeProdotti.listaPizze)
+                    if (lista == ListeProdotti.getListaPizze())
                         intentProdotto.putExtra("idCategoria", 1);
-                    else if (lista == MetodiPubblici.listeProdotti.listaPanini)
+                    else if (lista == ListeProdotti.getListaPanini())
                         intentProdotto.putExtra("idCategoria", 2);
-                    else if (lista == MetodiPubblici.listeProdotti.listaBibite)
+                    else if (lista == ListeProdotti.getListaBibite())
                         intentProdotto.putExtra("idCategoria", 3);
-                    else if (lista == MetodiPubblici.listeProdotti.listaStuzzicherie)
+                    else if (lista == ListeProdotti.getListaStuzzicherie())
                         intentProdotto.putExtra("idCategoria", 4);
                     intentProdotto.putExtra("idBottone", btn.getId());
                     startActivity(intentProdotto);

@@ -11,12 +11,12 @@ public class ProdottiScelti {
 
     // In questi vettori salvo solo gli ID prodotto così che poi vengano prelevati i dettagli dai vettori già esistenti
 
-    private List<Integer> pizzeScelte = new ArrayList<Integer>(); // cat 1
-    private List<Integer> paniniScelti = new ArrayList<Integer>(); // cat 2
-    private List<Integer> bibiteScelte = new ArrayList<Integer>(); // cat 3
-    private List<Integer> stuzzicherieScelte = new ArrayList<Integer>(); // cat 4
+    private static List<Integer> pizzeScelte = new ArrayList<Integer>(); // cat 1
+    private static List<Integer> paniniScelti = new ArrayList<Integer>(); // cat 2
+    private static List<Integer> bibiteScelte = new ArrayList<Integer>(); // cat 3
+    private static List<Integer> stuzzicherieScelte = new ArrayList<Integer>(); // cat 4
 
-    public void aggiungiProdotto(int idProdotto, int categoria) {
+    public static void aggiungiProdotto(int idProdotto, int categoria) {
         switch (categoria) {
             case 1:
                 pizzeScelte.add(idProdotto);
@@ -33,7 +33,7 @@ public class ProdottiScelti {
         }
     }
 
-    public void rimuoviProdotto(int idProdotto, int categoria) {
+    public static void rimuoviProdotto(int idProdotto, int categoria) {
         boolean trovato = false;
         int i = 0;
         switch (categoria) {
@@ -76,7 +76,7 @@ public class ProdottiScelti {
         }
     }
 
-    public void annullaOrdine() {
+    public static void annullaOrdine() {
         pizzeScelte.removeAll(pizzeScelte);
         paniniScelti.removeAll(paniniScelti);
         bibiteScelte.removeAll(bibiteScelte);
@@ -85,39 +85,39 @@ public class ProdottiScelti {
 
     // Get
 
-    public int getGrandezzaTotale() {
+    public static int getGrandezzaTotale() {
         return pizzeScelte.size() + paniniScelti.size() + bibiteScelte.size() + stuzzicherieScelte.size();
     }
 
-    public int getNumPizze() {
+    public static int getNumPizze() {
         return pizzeScelte.size();
     }
 
-    public int getNumPanini() {
+    public static int getNumPanini() {
         return paniniScelti.size();
     }
 
-    public int getNumBibite() {
+    public static int getNumBibite() {
         return bibiteScelte.size();
     }
 
-    public int getNumStuzzicherie() {
+    public static int getNumStuzzicherie() {
         return stuzzicherieScelte.size();
     }
 
-    public List<Integer> getPizzeScelte() {
+    public static List<Integer> getPizzeScelte() {
         return pizzeScelte;
     }
 
-    public List<Integer> getPaniniScelti() {
+    public static List<Integer> getPaniniScelti() {
         return paniniScelti;
     }
 
-    public List<Integer> getBibiteScelte() {
+    public static List<Integer> getBibiteScelte() {
         return bibiteScelte;
     }
 
-    public List<Integer> getStuzzicherieScelte() {
+    public static List<Integer> getStuzzicherieScelte() {
         return stuzzicherieScelte;
     }
 }

@@ -38,7 +38,7 @@ public class ActivityQuantita extends AppCompatActivity {
                 EditText quantita = (EditText)findViewById(R.id.editQuantita);
                 int quantitaScelta = Integer.parseInt(quantita.getText().toString());
                 for (int i = 0; i < quantitaScelta; i++) {
-                    MetodiPubblici.prodottiScelti.aggiungiProdotto(idProdotto, idCategoria);
+                    ProdottiScelti.aggiungiProdotto(idProdotto, idCategoria);
                 }
                     Toast toast = Toast.makeText(getApplicationContext(), "Prodotto aggiunto.", Toast.LENGTH_SHORT);
                 toast.show();
