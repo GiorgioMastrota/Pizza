@@ -8,8 +8,12 @@ public class ProgettoPizzaServer {
         GestioneCodici gc = new GestioneCodici();
         
         while (true){
+            rete.attesaConnessione();
             // Attesa della richiesta
-            String ricevuto = rete.Ricevi();
+            String ricevuto = "";
+            while (ricevuto.equals("")){
+                ricevuto = rete.Ricevi();
+            }
             if (ricevuto.equals("richiestaMenu")){
                 // Lettura del database e successivo invio
             }    
@@ -17,6 +21,7 @@ public class ProgettoPizzaServer {
                 String nuovoCodice = gc.getNuovoCodice();
                 rete.Invia(nuovoCodice);
             }
+            rete.chiudiConnessione();
         }
     }
     

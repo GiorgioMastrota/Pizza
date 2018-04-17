@@ -2,75 +2,104 @@ package progettopizzaserver;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Nava_Stefano
  */
-public class ReteServer {
-    private static int portaClient; // Per la porta del client    
-    private static InetAddress IPClient; // Per l'ip del client
-    static DatagramSocket serverSocket; // Socket Server
-    
-    private static byte[] bufferOUT = new byte[1024];
-    private static byte[] bufferIN = new byte[1024];
+public class ReteServer extends Thread{
 
-    public ReteServer(){
+    InputStream inputStream;
+    OutputStream outputStream;
+    OutputStreamWriter outputStreamWriter;
+
+    ServerSocket server;
+    Socket connessione;
+
+    byte[] buffer = new byte[1024];
+
+    InetAddress clientIP;
+    int clientPorta;
+
+    public ReteServer() {
         try {
-            serverSocket = new DatagramSocket(3333);
-        } catch (SocketException ex) {
-            System.out.println("Errore nell'inizializzazione dei valori del server.");
-            Logger.getLogger(ReteServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public boolean Invia(String messaggio) {
-        if (serverSocket == null) {
-            try {
-                serverSocket = new DatagramSocket(3333);
-            } catch (SocketException ex) {
-                Logger.getLogger(ReteServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        try {
-            bufferOUT = messaggio.getBytes(); // Inserisco il messaggio nel buffer
-            DatagramPacket pacchettoInvio // Creo il pacchetto per la trasmissione
-                    = new DatagramPacket(bufferOUT, bufferOUT.length, IPClient, portaClient); // Inserisco nel pacchetto i dati
-            serverSocket.send(pacchettoInvio); // Invio il pacchetto
+            server = new ServerSocket(3333);
+            //server.setSoTimeout(10000); // 10 secondi di timeout
+            connessione = null;
+            inputStream = null;
+            outputStream = null;
+            outputStreamWriter = null;
+            clientIP = null;
+            clientPorta = 0;
         } catch (IOException ex) {
-            System.out.println("Errore nell'invio del pacchetto al client.");
+            System.err.println("Errore nella creazione dell'oggetto ServerSocket.");
         }
-        return true;
     }
-    
+
+    public void attesaConnessione() {
+        System.out.println("Server avviato, attesa di una connessione da parte del client...");
+        try {
+            connessione = server.accept(); // Attende finché il client non richiede una connessione
+            clientIP = connessione.getInetAddress();
+            clientPorta = connessione.getPort();
+            System.out.println("Connessione stabilita con " + clientIP + ":" + clientPorta + ".");
+        } catch (IOException ex) {
+            System.err.println("Errore nell'attesa di una richiesta di connessione dal client.");
+        }
+    }
+
+    public void Invia(String messaggio) {
+        try {
+            outputStream = connessione.getOutputStream();
+            outputStreamWriter = new OutputStreamWriter(outputStream, "ISO-8859-1");
+            outputStreamWriter.write(messaggio);
+            outputStreamWriter.flush();
+            TimeUnit.MILLISECONDS.sleep(10);
+        } catch (IOException ex) {
+            System.err.println("Errore nell'invio del messaggio dal server.");
+        } catch (InterruptedException ex) {
+            System.err.println("Errore nell'invio del messaggio dal server.");
+        }
+    }
+
     public String Ricevi() {
         String ricevuto = "";
+        String frammento = "";
+        int n = 0;
         try {
-            DatagramPacket pacchettoRicezione // Creo il pacchetto per la ricezione
-                    = new DatagramPacket(bufferIN, bufferIN.length);
-            serverSocket.receive(pacchettoRicezione); // Ricevo il pacchetto
-            ricevuto = new String(pacchettoRicezione.getData()); // Inserisco in una stringa il messaggio ricevuto
-            int numCaratteri = pacchettoRicezione.getLength(); // Conto i caratteri del messaggio
-            ricevuto = ricevuto.substring(0, numCaratteri); // Elimino i caratteri in eccesso
-
-            // recupero dei parametri del socket associato al client
-            IPClient = pacchettoRicezione.getAddress();
-            portaClient = pacchettoRicezione.getPort();
+            do {
+                inputStream = connessione.getInputStream();
+                if ((n = inputStream.read(buffer)) != -1) {
+                    frammento = new String(buffer, 0, n, "ISO-8859-1");
+                    ricevuto += frammento;
+                }
+            } while (ricevuto.equals(""));
         } catch (IOException ex) {
-            System.out.println("Errore nella ricezione del pacchetto.");
+            System.err.println("Errore nella ricezione di un messaggio dal client.");
         }
+        //System.out.println("> DAL CLIENT: " + ricevuto);
         return ricevuto;
     }
-    
-    //=========================GET E SET======================================//
-    
-    public static int getPortaClient() {
-        return portaClient;
-    }
 
-    public static InetAddress getIPClient() {
-        return IPClient;
+    public void chiudiConnessione() {
+        try {
+            connessione.shutdownInput();
+            connessione.shutdownOutput();
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStreamWriter != null) {
+                outputStreamWriter.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+            connessione.close();
+            System.out.println("Connessione chiusa.");
+        } catch (IOException ex) {
+            System.err.println("Errore nella chiusura della connessione.");
+        }
     }
 }

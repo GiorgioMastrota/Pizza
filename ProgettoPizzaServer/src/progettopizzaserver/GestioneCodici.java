@@ -13,6 +13,7 @@ public class GestioneCodici {
     public String getNuovoCodice() {
         String codice = generaCodice();
         codiciBarre.add(codice);
+        System.out.println(codice);
         return codice;
     }
 
