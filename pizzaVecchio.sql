@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 17, 2018 alle 09:47
+-- Creato il: Mar 17, 2018 alle 10:32
 -- Versione del server: 10.1.16-MariaDB
 -- Versione PHP: 7.0.9
 
@@ -184,31 +184,26 @@ INSERT INTO `listino` (`id`, `prodotto`, `costo`, `categoria`, `descrizione`) VA
 (88, 'Calzone Liscio', '5.90', 'Pizza', 'mozzarella, pomodoro, prosciutto cotto, grana'),
 (89, 'Calzone 4 Formaggi', '6.40', 'Pizza', 'mozzarella, pomodoro, zola, fontina, grana'),
 (90, 'Calzone Farcito', '6.40', 'Pizza', 'mozzarella, pomodoro, prosciutto cotto, carciofi, funghi, grana'),
-(91, 'Calzone Imperiale', '7.40', 'Pizza', 'mozzarella, pomodoro, rucola, gamberetti'),
-(92, 'Focaccia Salata', '2.90', 'Pizza', 'olio, sale'),
-(93, 'Focaccia Cotto', '3.90', 'Pizza', 'olio, sale, prosciutto cotto'),
-(94, 'Focaccia Colonnata', '4.40', 'Pizza', 'olio, sale'),
-(95, 'Focaccia Patate', '4.40', 'Pizza', 'olio, sale, rosmarino, patate, grana'),
-(96, 'Focaccia Speck', '4.40', 'Pizza', 'olio, sale, speck'),
-(97, 'Focaccia Bresaola', '4.90', 'Pizza', 'olio, sale, bresaola'),
-(98, 'Focaccia Filigrana', '4.90', 'Pizza', 'olio, sale, friarielli, grana'),
-(99, 'Focaccia Parma', '4.90', 'Pizza', 'olio, sale, crudo di parma'),
-(100, 'Focaccia Ortolana', '5.90', 'Pizza', 'olio, sale, peperoni, melanzane, zucchine'),
-(101, 'Focaccia Peppa', '5.90', 'Pizza', 'olio, sale, patate, stracchino, pesto, grana'),
-(102, 'Focaccia Bufala', '6.90', 'Pizza', 'olio, sale, origano, mozzarella di bufala, rucola, pomodorini'),
-(103, 'Focaccia Ripiena Nutella', '3.40', 'Pizza', 'nutella'),
-(104, 'Focaccia Ripiena Cotto e Mozza', '4.90', 'Pizza', 'mozzarella, prosciutto cotto'),
-(105, 'Focaccia Ripiena Praga Scamorza', '5.40', 'Pizza', 'praga, scamorza'),
-(106, 'Focaccia Ripiena Salame e Stracco', '5.40', 'Pizza', 'salame dolce e stracchino'),
-(107, 'Focaccia Ripiena Speck e Scamorza', '5.40', 'Pizza', 'speck, scamorza'),
-(108, 'Focaccia Ripiena Crudo e Brie', '5.90', 'Pizza', 'crudo di parma, brie'),
-(109, 'Baguette Liscia', '5.40', 'Pizza', 'mozzarella, prosciutto cotto'),
-(110, 'Baguette Del Tirolo', '6.90', 'Pizza', 'mozzarella, brie, speck'),
-(111, 'Baguette Classica', '7.40', 'Pizza', 'mozzarella, crudo di parma, stracchino'),
-(112, 'Bacon', '5.50', 'Panino', 'hamburger, pomodoro, insalata, bacon, salsa barbeque'),
-(113, 'Krukko', '5.50', 'Panino', 'hamburger, speck, grana a scaglie, vellutata di funghi porcini'),
-(114, 'Calabro', '5.50', 'Panino', 'hamburger, cipolla dorata, peperoni arrostiti, n duja, salsa pink'),
-(115, 'Cheesebruger', '5.50', 'Panino', 'hamburger, brie, salsa tartara, ketchup, tabasco');
+(91, 'Calzone Imperiale', '7.40', 'Pizza', 'mozzarella, pomodoro, rucola, gamberetti');
+(92, 'Focaccia Salata', '2.90', 'Pizza', 'olio, sale');
+(93, 'Focaccia Cotto', '3.60', 'Pizza', 'olio, sale, prosciutto cotto');
+(94, 'Focaccia Colonnata', '4.40', 'Pizza', 'olio, sale, lardo di colonnata, pepe');
+(95, 'Focaccia Patate', '4.40', 'Pizza', 'olio, sale, patate, rosmarino, grana');
+(96, 'Focaccia Speck', '4.40', 'Pizza', 'olio, sale, speck');
+(97, 'Focaccia Bresaola', '4.90', 'Pizza', 'olio, sale, bresaola');
+(98, 'Focaccia Filigrana', '4.90', 'Pizza', 'olio, sale, friarielli, grana');
+(99, 'Focaccia Parma', '4.90', 'Pizza', 'olio, sale, crudo di parma');
+(100, 'Focaccia Ortolana', '5.90', 'Pizza', 'olio, sale, peperoni, melanzane, zucchine');
+(101, 'Focaccia Peppa', '5.90', 'Pizza', 'olio, sale, patate, stracchino, pesto, grana');
+(102, 'Focaccia Bufala', '6.90', 'Pizza', 'olio, sale, origano, mozzarella di bufala, rucola, pomodoro fresco');
+(101, 'Focaccia Ripiena Nutella', '5.40', 'Pizza', 'nutella');
+(101, 'Focaccia Ripiena Prociutto Cotto e Mozzarella', '5.40', 'Pizza', 'prosciutto cotto, mozzarella');
+(101, 'Focaccia Ripiena', '5.40', 'Pizza', '');
+(101, 'Focaccia Ripiena', '5.40', 'Pizza', '');
+(101, 'Focaccia Ripiena', '5.40', 'Pizza', '');
+(101, 'Focaccia Ripiena', '5.40', 'Pizza', '');
+
+
 
 -- --------------------------------------------------------
 
@@ -296,7 +291,7 @@ ALTER TABLE `fornitori`
 -- AUTO_INCREMENT per la tabella `listino`
 --
 ALTER TABLE `listino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT per la tabella `magazzino`
 --

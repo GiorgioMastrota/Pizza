@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 17, 2018 alle 09:47
+-- Creato il: Apr 17, 2018 alle 09:35
 -- Versione del server: 10.1.16-MariaDB
 -- Versione PHP: 7.0.9
 
@@ -205,10 +205,10 @@ INSERT INTO `listino` (`id`, `prodotto`, `costo`, `categoria`, `descrizione`) VA
 (109, 'Baguette Liscia', '5.40', 'Pizza', 'mozzarella, prosciutto cotto'),
 (110, 'Baguette Del Tirolo', '6.90', 'Pizza', 'mozzarella, brie, speck'),
 (111, 'Baguette Classica', '7.40', 'Pizza', 'mozzarella, crudo di parma, stracchino'),
-(112, 'Bacon', '5.50', 'Panino', 'hamburger, pomodoro, insalata, bacon, salsa barbeque'),
-(113, 'Krukko', '5.50', 'Panino', 'hamburger, speck, grana a scaglie, vellutata di funghi porcini'),
-(114, 'Calabro', '5.50', 'Panino', 'hamburger, cipolla dorata, peperoni arrostiti, n duja, salsa pink'),
-(115, 'Cheesebruger', '5.50', 'Panino', 'hamburger, brie, salsa tartara, ketchup, tabasco');
+(112, 'Bacon', '5.50', 'Hamburger', 'harbuerger, pomodoro, insalata, bacon, salsa barbeque'),
+(113, 'Krukko', '5.00', 'Hamburger', 'harbuerger, speck, grana a scaglie, vellutata di funghi porcini'),
+(114, 'Calabro', '5.50', 'Hamburger', 'harbuerger, cipolla dorata, peperoni arrostiti, n duja, salsa pink'),
+(115, 'Cheesebruger', '5.50', 'Hamburger', 'harbuerger, brie, salsa tartara, ketchup, tabasco');
 
 -- --------------------------------------------------------
 
