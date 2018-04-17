@@ -18,6 +18,7 @@ import com.google.zxing.common.BitMatrix;
 public class ActivityBarcode extends AppCompatActivity {
 
     boolean barcodeGenerato = false;
+    final static ReteClient rete = new ReteClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class ActivityBarcode extends AppCompatActivity {
         setContentView(R.layout.activity_barcode);
 
         // Richiede codice numerico al server che glielo invia
-        //String codice = MetodiPubblici.richiestaBarcode();
-        String codice = "12345678";
+        String codice = richiestaBarcode();
+        //String codice = "12345678";
         // Lo fa il server per avere maggior controllo su quelli già esistente
 
         ImageView imageView = (ImageView) findViewById(R.id.imgBarcode);
@@ -75,5 +76,11 @@ public class ActivityBarcode extends AppCompatActivity {
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, MetodiPubblici.getLarghezzaSchermo() / 2, 0, 0, w, h);
         return bitmap;
+    }
+
+    private String richiestaBarcode(){
+        rete.Invia("richiestaBarcode");
+        String codice = rete.Ricevi();
+        return codice;
     }
 }

@@ -1,68 +1,118 @@
 package it.nava.progettopizza;
 
+import android.os.AsyncTask;
+
 import java.io.*;
 import java.net.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
 
-public class ReteClient {
-    private static int portaServer; // Per la porta del server    
-    private static InetAddress IPServer; // Per l'ip del server
-    static DatagramSocket clientSocket; // Socket Client
-    
-    private static byte[] bufferOUT = new byte[1024];
-    private static byte[] bufferIN = new byte[1024];
-    
-    public ReteClient(){
+/**
+ * @author Nava_Stefano
+ */
+public class ReteClient extends AsyncTask<String, Void> {
+
+    InputStream inputStream;
+    OutputStream outputStream;
+    OutputStreamWriter outputStreamWriter;
+
+    Socket connessione;
+
+    byte[] buffer = new byte[1024];
+
+    InetSocketAddress ipServer;
+    int portaServer;
+
+    public ReteClient() {
         try {
-            portaServer = 3333;
-            IPServer = InetAddress.getByName("172.16.102.116");
-            clientSocket = new DatagramSocket();
-        } catch (SocketException | UnknownHostException ex) {
-            System.out.println("Errore nell'inizializzazione dei valori del client.");                               
-            Logger.getLogger(ReteClient.class.getName()).log(Level.SEVERE, null, ex);
+            connessione = new Socket();
+            connessione.setSoTimeout(10000);
+        } catch (SocketException ex) {
+            System.err.println("Errore nella creazione del Socket del client.");
         }
     }
-    
-    public static boolean Invia(String messaggio) {
-        if (clientSocket == null) {
-            try {
-                clientSocket = new DatagramSocket();
-            } catch (SocketException ex) {
-                Logger.getLogger(ReteClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
+    public void Connetti(String ip, int porta) {
         try {
-            bufferOUT = messaggio.getBytes(); // Inserisco il messaggio nel buffer
-            DatagramPacket pacchettoInvio // Creo il pacchetto per la trasmissione
-                    = new DatagramPacket(bufferOUT, bufferOUT.length, IPServer, portaServer); // Inserisco nel pacchetto i dati
-            clientSocket.send(pacchettoInvio); // Invio il pacchetto
+            ipServer = new InetSocketAddress(ip, porta);
+            connessione.connect(ipServer, 10000); // Con timeout di 10 secondi
+            System.out.println("Connessione stabilita con " + ip + ":" + porta + ".");
         } catch (IOException ex) {
-            System.out.println("Errore nell'invio del pacchetto al server.");
+            System.err.println("Errore nella connessione al server.");
         }
-        return true;
     }
 
-    public static String Ricevi() {
+    public void Invia(String messaggio) {
+        Connetti("127.0.0.1", 3333);
+        try {
+            outputStream = connessione.getOutputStream();
+            outputStreamWriter = new OutputStreamWriter(outputStream, "ISO-8859-1");
+            outputStreamWriter.write(messaggio);
+            outputStreamWriter.flush();
+            TimeUnit.MILLISECONDS.sleep(10);
+        } catch (IOException ex) {
+            System.err.println("Errore nell'invio del messaggio dal server.");
+        } catch (InterruptedException ex) {
+            System.err.println("Errore nell'invio del messaggio dal server.");
+        }
+        chiudiConnessione();
+    }
+
+    public String Ricevi() {
+        Connetti("127.0.0.1", 3333);
         String ricevuto = "";
+        String frammento = "";
+        int n = 0;
         try {
-            DatagramPacket pacchettoRicezione // Creo il pacchetto per la ricezione
-                    = new DatagramPacket(bufferIN, bufferIN.length);
-            clientSocket.receive(pacchettoRicezione); // Ricevo il pacchetto
-            ricevuto = new String(pacchettoRicezione.getData()); // Inserisco in una stringa il messaggio ricevuto
-            int numCaratteri = pacchettoRicezione.getLength(); // Conto i caratteri del messaggio
-            ricevuto = ricevuto.substring(0, numCaratteri); // Elimino i caratteri in eccesso
-
+            do {
+                inputStream = connessione.getInputStream();
+                if ((n = inputStream.read(buffer)) != -1) {
+                    frammento = new String(buffer, 0, n, "ISO-8859-1");
+                    ricevuto += frammento;
+                }
+            } while (ricevuto.equals(""));
         } catch (IOException ex) {
-            System.out.println("Errore nella ricezione del pacchetto.");
+            System.err.println("Errore nella ricezione di un messaggio dal server.");
         }
+        //System.out.println("> DAL SERVER: " + ricevuto);
+        chiudiConnessione();
         return ricevuto;
     }
-    
-    //===========================GET E SET====================================//
-    
-    public static int getPortaServer() {
-        return portaServer;
+
+    public void chiudiConnessione() {
+        try {
+            connessione.shutdownInput();
+            connessione.shutdownOutput();
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStreamWriter != null) {
+                outputStreamWriter.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+            connessione.close();
+            System.out.println("Connessione chiusa.");
+        } catch (IOException ex) {
+            System.err.println("Errore nella chiusura della connessione.");
+        }
     }
 
+    protected Void doInBackground(String... urls) {
+        try {
+
+        } catch (Exception e) {
+            this.exception = e;
+
+            return null;
+        } finally {
+            is.close();
+        }
+        return null;
+    }
+
+    protected void onPostExecute() {
+        // TODO: check this.exception
+        // TODO: do something with the feed
+    }
 }

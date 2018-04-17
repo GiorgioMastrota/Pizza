@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 
 public class ActivityMain extends AppCompatActivity {
 
+    final static ReteClient rete = new ReteClient();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,5 +75,16 @@ public class ActivityMain extends AppCompatActivity {
         super.onResume();
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
         MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
+    }
+
+    private void richiestaMenu(){
+        /* Il metodo funziona così: il server legge i dati dal database tramite php, conteggia quanti dati ha letto;
+        *  Successivamente manda al client il numero di dati letti in modo che egli possa fare un ciclo di ricezione per le stringhe del menù;
+        *  il client le suddivide nei vettori (pizze, panini, bibite, stuzzicherie) in modo che nelle activity specifiche vengano mostrati
+        *  i menù relativi alla categoria.
+        */
+        rete.Invia("richiestaMenu");
+        int numStringheMenu = Integer.parseInt(rete.Ricevi());
+        // Le cose ricevute dal menù devono poi essere settate nei vettori
     }
 }
