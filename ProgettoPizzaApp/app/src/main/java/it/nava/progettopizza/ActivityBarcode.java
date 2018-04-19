@@ -18,7 +18,6 @@ import com.google.zxing.common.BitMatrix;
 public class ActivityBarcode extends AppCompatActivity {
 
     boolean barcodeGenerato = false;
-    final static ReteClient rete = new ReteClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +78,9 @@ public class ActivityBarcode extends AppCompatActivity {
     }
 
     private String richiestaBarcode(){
-        rete.Invia("richiestaBarcode");
-        String codice = rete.Ricevi();
+        ReteClient invio = new ReteClient(1, "richiestaBarcode");
+        ReteClient ricezione = new ReteClient(0);
+        String codice = MetodiPubblici.ricevuto;
         return codice;
     }
 }

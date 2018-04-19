@@ -9,8 +9,6 @@ import android.widget.ImageButton;
 
 public class ActivityMain extends AppCompatActivity {
 
-    final static ReteClient rete = new ReteClient();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +81,8 @@ public class ActivityMain extends AppCompatActivity {
         *  il client le suddivide nei vettori (pizze, panini, bibite, stuzzicherie) in modo che nelle activity specifiche vengano mostrati
         *  i menù relativi alla categoria.
         */
-        rete.Invia("richiestaMenu");
-        int numStringheMenu = Integer.parseInt(rete.Ricevi());
+        //rete.Invia("richiestaMenu");
+        //int numStringheMenu = Integer.parseInt(rete.Ricevi());
         // Le cose ricevute dal menù devono poi essere settate nei vettori
     }
 }

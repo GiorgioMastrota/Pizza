@@ -18,6 +18,8 @@ import java.util.List;
 
 public class MetodiPubblici {
 
+    static String ricevuto = "";
+
     // Dimensioni schermo
     public static int getLarghezzaSchermo() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;

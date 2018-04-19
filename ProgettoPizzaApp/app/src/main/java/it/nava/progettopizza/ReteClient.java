@@ -1,118 +1,94 @@
 package it.nava.progettopizza;
 
-import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
-import java.io.*;
-import java.net.*;
-import java.util.concurrent.TimeUnit;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Nava_Stefano
  */
-public class ReteClient extends AsyncTask<String, Void> {
+public class ReteClient implements Runnable {
 
-    InputStream inputStream;
-    OutputStream outputStream;
-    OutputStreamWriter outputStreamWriter;
+    private Socket socket;
+    private BufferedReader input;
 
-    Socket connessione;
+    public static final int SERVERPORT = 3333;
+    public static final String SERVER_IP = "127.0.0.1";
 
-    byte[] buffer = new byte[1024];
+    public static final String TAG = ReteClient.class.getSimpleName();
 
-    InetSocketAddress ipServer;
-    int portaServer;
-
-    public ReteClient() {
+    @Override
+    public void run() {
         try {
-            connessione = new Socket();
-            connessione.setSoTimeout(10000);
-        } catch (SocketException ex) {
-            System.err.println("Errore nella creazione del Socket del client.");
-        }
-    }
+            InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
+            socket = new Socket(serverAddr, SERVERPORT);
 
-    public void Connetti(String ip, int porta) {
-        try {
-            ipServer = new InetSocketAddress(ip, porta);
-            connessione.connect(ipServer, 10000); // Con timeout di 10 secondi
-            System.out.println("Connessione stabilita con " + ip + ":" + porta + ".");
-        } catch (IOException ex) {
-            System.err.println("Errore nella connessione al server.");
-        }
-    }
+            while (!Thread.currentThread().isInterrupted()) {
 
-    public void Invia(String messaggio) {
-        Connetti("127.0.0.1", 3333);
-        try {
-            outputStream = connessione.getOutputStream();
-            outputStreamWriter = new OutputStreamWriter(outputStream, "ISO-8859-1");
-            outputStreamWriter.write(messaggio);
-            outputStreamWriter.flush();
-            TimeUnit.MILLISECONDS.sleep(10);
-        } catch (IOException ex) {
-            System.err.println("Errore nell'invio del messaggio dal server.");
-        } catch (InterruptedException ex) {
-            System.err.println("Errore nell'invio del messaggio dal server.");
-        }
-        chiudiConnessione();
-    }
+                Log.i(TAG, "Waiting for message from server...");
 
-    public String Ricevi() {
-        Connetti("127.0.0.1", 3333);
-        String ricevuto = "";
-        String frammento = "";
-        int n = 0;
-        try {
-            do {
-                inputStream = connessione.getInputStream();
-                if ((n = inputStream.read(buffer)) != -1) {
-                    frammento = new String(buffer, 0, n, "ISO-8859-1");
-                    ricevuto += frammento;
+                this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                String message = input.readLine();
+                Log.i(TAG, "Message received from the server : " + message);
+
+                if (null == message || "Disconnect".contentEquals(message)) {
+                    Thread.interrupted();
+                    message = "Server Disconnected.";
+                    updateMessage(getTime() + " | Server : " + message);
+                    break;
                 }
-            } while (ricevuto.equals(""));
-        } catch (IOException ex) {
-            System.err.println("Errore nella ricezione di un messaggio dal server.");
+
+                updateMessage(getTime() + " | Server : " + message);
+
+            }
+
+        } catch (UnknownHostException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
-        //System.out.println("> DAL SERVER: " + ricevuto);
-        chiudiConnessione();
-        return ricevuto;
+
     }
 
-    public void chiudiConnessione() {
+    void sendMessage(String message) {
         try {
-            connessione.shutdownInput();
-            connessione.shutdownOutput();
-            if (inputStream != null) {
-                inputStream.close();
+            if (null != socket) {
+                PrintWriter out = new PrintWriter(new BufferedWriter(
+                        new OutputStreamWriter(socket.getOutputStream())),
+                        true);
+                out.println(message);
             }
-            if (outputStreamWriter != null) {
-                outputStreamWriter.close();
-            }
-            if (outputStream != null) {
-                outputStream.close();
-            }
-            connessione.close();
-            System.out.println("Connessione chiusa.");
-        } catch (IOException ex) {
-            System.err.println("Errore nella chiusura della connessione.");
-        }
-    }
-
-    protected Void doInBackground(String... urls) {
-        try {
-
         } catch (Exception e) {
-            this.exception = e;
-
-            return null;
-        } finally {
-            is.close();
+            e.printStackTrace();
         }
-        return null;
     }
 
-    protected void onPostExecute() {
-        // TODO: check this.exception
-        // TODO: do something with the feed
+    String getTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(new Date());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != clientThread) {
+            clientThread.sendMessage("Disconnect");
+            clientThread = null;
+        }
     }
 }
