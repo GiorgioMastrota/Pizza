@@ -78,8 +78,7 @@ public class ActivityBarcode extends AppCompatActivity {
     }
 
     private String richiestaBarcode(){
-        ReteClient invio = new ReteClient(1, "richiestaBarcode");
-        ReteClient ricezione = new ReteClient(0);
+        // da richiedere barcode
         String codice = MetodiPubblici.ricevuto;
         return codice;
     }

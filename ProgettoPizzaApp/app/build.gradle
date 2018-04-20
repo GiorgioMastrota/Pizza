@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    useLibrary 'org.apache.http.legacy'
 }
 ext {
     supportLibVersion = '26.1.0'  // variable that can be referenced to keep support libs consistent
