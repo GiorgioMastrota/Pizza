@@ -25,8 +25,7 @@ public class ActivityBarcode extends AppCompatActivity {
         setContentView(R.layout.activity_barcode);
 
         // Richiede codice numerico al server che glielo invia
-        String codice = richiestaBarcode();
-        //String codice = "12345678";
+        String codice = "12345678";
         // Lo fa il server per avere maggior controllo su quelli già esistente
 
         ImageView imageView = (ImageView) findViewById(R.id.imgBarcode);

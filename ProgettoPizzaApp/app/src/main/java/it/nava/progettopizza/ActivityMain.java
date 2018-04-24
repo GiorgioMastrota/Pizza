@@ -15,6 +15,8 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Pizzeria Ismail El Abiad");
 
+        ConnessioneDB.getMenu();
+
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
