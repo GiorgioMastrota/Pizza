@@ -15,7 +15,7 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Pizzeria Ismail El Abiad");
 
-        ConnessioneDB menu = new ConnessioneDB(0);
+        DB_LeggiMenu menu = new DB_LeggiMenu(0);
         menu.execute();
 
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
