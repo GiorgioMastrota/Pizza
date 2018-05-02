@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.concurrent.ExecutionException;
+
 public class ActivityMain extends AppCompatActivity {
 
     @Override
@@ -15,8 +17,23 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Pizzeria Ismail El Abiad");
 
-        ConnessioneDB menu = new ConnessioneDB(0);
-        menu.execute("Pizza");
+        OperazioniDB pizze = new OperazioniDB(0);
+        OperazioniDB panini = new OperazioniDB(0);
+        OperazioniDB bibite = new OperazioniDB(0);
+        OperazioniDB stuzzicherie = new OperazioniDB(0);
+        try {
+            String pizzeLette = pizze.execute("Pizza").get();
+            String paniniLetti = panini.execute("Panino").get();
+            String bibiteLette = bibite.execute("Bibite").get();
+            String stuzzicherieLette = stuzzicherie.execute("Stuzzicheria").get();
+            inizializzaMenu("Pizza", pizzeLette);
+            inizializzaMenu("Panino", paniniLetti);
+            inizializzaMenu("Bibite", bibiteLette);
+            inizializzaMenu("Stuzzicheria", stuzzicherieLette);
+
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("MainActivity: errore nell'esecuzione dei thread per la comunicazione col db.");
+        }
 
         Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
@@ -78,14 +95,31 @@ public class ActivityMain extends AppCompatActivity {
         MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
     }
 
-    private void richiestaMenu(){
-        /* Il metodo funziona così: il server legge i dati dal database tramite php, conteggia quanti dati ha letto;
-        *  Successivamente manda al client il numero di dati letti in modo che egli possa fare un ciclo di ricezione per le stringhe del menù;
-        *  il client le suddivide nei vettori (pizze, panini, bibite, stuzzicherie) in modo che nelle activity specifiche vengano mostrati
-        *  i menù relativi alla categoria.
-        */
-        //rete.Invia("richiestaMenu");
-        //int numStringheMenu = Integer.parseInt(rete.Ricevi());
-        // Le cose ricevute dal menù devono poi essere settate nei vettori
+    private void inizializzaMenu(String categoria, String stringa){
+        String[] righeLette = stringa.split(":");
+        for (int i = 0; i < righeLette.length; i++){
+            System.out.println(righeLette[i]);
+            String[] rigaSplit = righeLette[i].split(";");
+            int id = Integer.parseInt(rigaSplit[0]);
+            String nome = rigaSplit[1];
+            double costo = Double.parseDouble(rigaSplit[2]);
+            String descrizione = rigaSplit[3];
+            if (categoria.equals("Pizza")){
+                Prodotto daInserire = new Prodotto(id, nome, 1, descrizione, costo);
+                ListeProdotti.aggiungiPizza(daInserire);
+            }
+            else if (categoria.equals("Panino")){
+                Prodotto daInserire = new Prodotto(id, nome, 2, descrizione, costo);
+                ListeProdotti.aggiungiPanino(daInserire);
+            }
+            else if (categoria.equals("Bibite")){
+                Prodotto daInserire = new Prodotto(id, nome, 3, descrizione, costo);
+                ListeProdotti.aggiungiBibita(daInserire);
+            }
+            else if (categoria.equals("Stuzzicheria")){
+                Prodotto daInserire = new Prodotto(id, nome, 4, descrizione, costo);
+                ListeProdotti.aggiungiStuzzicheria(daInserire);
+            }
+        }
     }
 }

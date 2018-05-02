@@ -17,15 +17,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-// https://www.tutorialspoint.com/android/android_php_mysql.htm
-// https://stackoverflow.com/questions/16574482/decoding-json-string-in-java
+// PER LA COMUNICAZIONE: https://www.tutorialspoint.com/android/android_php_mysql.htm
+// PER LA DECODIFICAZIONE JSON: https://stackoverflow.com/questions/16574482/decoding-json-string-in-java
 
-public class ConnessioneDB extends AsyncTask<String, String, String> {
+public class OperazioniDB extends AsyncTask<String, String, String> {
     private int operazione = 0;
-    String categoria, risultato;
+    private String categoria, risultato;
 
-    //flag 0 means get and 1 means post.(By default it is get.)
-    public ConnessioneDB(int op) {
+    public OperazioniDB(int op) {
         operazione = op;
         categoria = "";
     }
@@ -57,7 +56,6 @@ public class ConnessioneDB extends AsyncTask<String, String, String> {
                     sb.append(line);
                     break;
                 }
-
                 in.close();
                 risultato = sb.toString();
                 return risultato;
@@ -67,6 +65,17 @@ public class ConnessioneDB extends AsyncTask<String, String, String> {
         } else return null;
     }
 
+    @Override
+    protected void onPostExecute(String result){
+        switch(operazione){
+            case 0: // lettura menù
+                System.out.println("OperazioniDB: Menù letto con successo.");
+                break;
+        }
+    }
+
+    // Metodo con il JSON non funzionante, alternativa con split normale
+    /*
     @Override
     protected void onPostExecute(String result) {
         //String jsonString = "{\"prodotti\": { \"id\": \"\", \"prodotto\": \"\", \"costo\": \"\", \"descrizione\": \"\"}}";
@@ -87,5 +96,5 @@ public class ConnessioneDB extends AsyncTask<String, String, String> {
         if (categoria.equals("Pizze")) {
 
         }
-    }
+    } */
 }
