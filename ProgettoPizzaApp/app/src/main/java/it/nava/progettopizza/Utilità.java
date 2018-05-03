@@ -47,9 +47,9 @@ public class Utilità {
     // Mette anche in ordine i parametri come sono scritti nel vettore (es. Nome;Cognome;AnnoNascita)
     public static String[] getParametriDaStringa(String daConvertire, int nParametri, String[] nomiParametri) {
         String[] parametri = new String[nParametri];
-        String[] splittato = new String[nParametri];
+        String[] splittato;
         splittato = daConvertire.split(";");
-        String[] parametroDiviso = new String[2];
+        String[] parametroDiviso;
         for (int i = 0; i < nParametri; i++) {
             parametroDiviso = splittato[i].split("=");
             for (int y = 0; y < nParametri; y++) {

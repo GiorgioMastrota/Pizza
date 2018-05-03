@@ -35,7 +35,7 @@ public class ActivityMain extends AppCompatActivity {
             System.err.println("MainActivity: errore nell'esecuzione dei thread per la comunicazione col db.");
         }
 
-        Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
+        Button btnRiepilogo = (Button) findViewById(R.id.btnMainRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +44,7 @@ public class ActivityMain extends AppCompatActivity {
         });
 
         // Passaggio Activity Pizze
-        ImageButton btnPizze = (ImageButton)findViewById(R.id.imgBtnPizze);
+        ImageButton btnPizze = (ImageButton) findViewById(R.id.imgBtnPizze);
         btnPizze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,7 @@ public class ActivityMain extends AppCompatActivity {
         });
 
         // Passaggio Activity Panini
-        ImageButton btnPanini = (ImageButton)findViewById(R.id.imgBtnPanini);
+        ImageButton btnPanini = (ImageButton) findViewById(R.id.imgBtnPanini);
         btnPanini.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +66,7 @@ public class ActivityMain extends AppCompatActivity {
         });
 
         // Passaggio Activity Bibite
-        ImageButton btnBibite = (ImageButton)findViewById(R.id.imgBtnBibite);
+        ImageButton btnBibite = (ImageButton) findViewById(R.id.imgBtnBibite);
         btnBibite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +77,7 @@ public class ActivityMain extends AppCompatActivity {
         });
 
         // Passaggio Activity Stuzzicherie
-        ImageButton btnStuzzicherie = (ImageButton)findViewById(R.id.imgBtnStuzzicherie);
+        ImageButton btnStuzzicherie = (ImageButton) findViewById(R.id.imgBtnStuzzicherie);
         btnStuzzicherie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,35 +88,34 @@ public class ActivityMain extends AppCompatActivity {
         });
     }
 
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
-        Button btnRiepilogo = (Button)findViewById(R.id.btnMainRiepilogo);
+        Button btnRiepilogo = (Button) findViewById(R.id.btnMainRiepilogo);
         MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
     }
 
-    private void inizializzaMenu(String categoria, String stringa){
+    private void inizializzaMenu(String categoria, String stringa) {
         String[] righeLette = stringa.split(":");
-        for (int i = 0; i < righeLette.length; i++){
+        for (int i = 0; i < righeLette.length; i++) {
+            int id;
+            String nome, descrizione;
+            double costo;
             System.out.println(righeLette[i]);
             String[] rigaSplit = righeLette[i].split(";");
-            int id = Integer.parseInt(rigaSplit[0]);
-            String nome = rigaSplit[1];
-            double costo = Double.parseDouble(rigaSplit[2]);
-            String descrizione = rigaSplit[3];
-            if (categoria.equals("Pizza")){
+            id = Integer.parseInt(rigaSplit[0]);
+            nome = rigaSplit[1];
+            costo = Double.parseDouble(rigaSplit[2]);
+            descrizione = rigaSplit[3];
+            if (categoria.equals("Pizza")) {
                 Prodotto daInserire = new Prodotto(id, nome, 1, descrizione, costo);
                 ListeProdotti.aggiungiPizza(daInserire);
-            }
-            else if (categoria.equals("Panino")){
+            } else if (categoria.equals("Panino")) {
                 Prodotto daInserire = new Prodotto(id, nome, 2, descrizione, costo);
                 ListeProdotti.aggiungiPanino(daInserire);
-            }
-            else if (categoria.equals("Bibite")){
+            } else if (categoria.equals("Bibite")) {
                 Prodotto daInserire = new Prodotto(id, nome, 3, descrizione, costo);
                 ListeProdotti.aggiungiBibita(daInserire);
-            }
-            else if (categoria.equals("Stuzzicheria")){
+            } else if (categoria.equals("Stuzzicheria")) {
                 Prodotto daInserire = new Prodotto(id, nome, 4, descrizione, costo);
                 ListeProdotti.aggiungiStuzzicheria(daInserire);
             }

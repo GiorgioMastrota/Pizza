@@ -63,14 +63,6 @@ public class ActivityProdotto extends AppCompatActivity {
     }
 
     public void creaListaBottoni(Context contesto, LinearLayout layoutPrincipale, int quantita, final List<Prodotto> lista){
-
-        Prodotto prova = new Prodotto(1, "Margherita", 1, "mozzarella, pomodoro, prosciutto cotto, funghi, carciofi, salame piccante, pancetta, olive", 8.40);
-        ListeProdotti.aggiungiPizza(prova);
-        prova = new Prodotto(2, "Marinara", 1, "non ricordo", 3);
-        ListeProdotti.aggiungiPizza(prova);
-        prova = new Prodotto(1, "Coca Cola", 3, "", 1.5);
-        ListeProdotti.aggiungiBibita(prova);
-
         for (int i = 0; i < lista.size(); i++) {
 
             LinearLayout ll = new LinearLayout(contesto);
@@ -153,5 +145,13 @@ public class ActivityProdotto extends AppCompatActivity {
 
             layoutPrincipale.addView(ll);
         }
+        // Spazio vuoto per evitare sovrapposizione bottone Riepilogo
+        TextView textVuoto = new TextView(contesto);
+        LinearLayout.LayoutParams lpVuoto = new LinearLayout.LayoutParams(
+                MetodiPubblici.getAltezzaSchermo() / 11, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+        textVuoto.setLayoutParams(lpVuoto);
+        textVuoto.setText(" ");
+        textVuoto.setTextSize(34);
+        layoutPrincipale.addView(textVuoto);
     }
 }
