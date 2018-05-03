@@ -15,6 +15,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.util.Random;
+
 public class ActivityBarcode extends AppCompatActivity {
 
     boolean barcodeGenerato = false;
@@ -24,9 +26,8 @@ public class ActivityBarcode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode);
 
-        // Richiede codice numerico al server che glielo invia
-        String codice = "12345678";
-        // Lo fa il server per avere maggior controllo su quelli già esistente
+        // Genera un codice random
+        String codice = generaCodice();
 
         ImageView imageView = (ImageView) findViewById(R.id.imgBarcode);
         try {
@@ -41,7 +42,7 @@ public class ActivityBarcode extends AppCompatActivity {
         btnAnnullaOrdine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ProdottiScelti.annullaOrdine();
-                // MANCA mandare al server che l'ordine è stato annullato
+                // MANCA mandare al database che l'ordine è stato annullato
                 startActivity(new Intent(ActivityBarcode.this, ActivityMain.class));
             }
         });
@@ -76,9 +77,12 @@ public class ActivityBarcode extends AppCompatActivity {
         return bitmap;
     }
 
-    private String richiestaBarcode(){
-        // da richiedere barcode
-        String codice = MetodiPubblici.ricevuto;
+    private String generaCodice(){
+        Random rand = new Random();
+        String codice = "";
+        for (int i = 0; i < 8; i++) {
+            codice += rand.nextInt(10);
+        }
         return codice;
     }
 }

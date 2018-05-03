@@ -17,23 +17,7 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Pizzeria Ismail El Abiad");
 
-        OperazioniDB pizze = new OperazioniDB(0);
-        OperazioniDB panini = new OperazioniDB(0);
-        OperazioniDB bibite = new OperazioniDB(0);
-        OperazioniDB stuzzicherie = new OperazioniDB(0);
-        try {
-            String pizzeLette = pizze.execute("Pizza").get();
-            String paniniLetti = panini.execute("Panino").get();
-            String bibiteLette = bibite.execute("Bibite").get();
-            String stuzzicherieLette = stuzzicherie.execute("Stuzzicheria").get();
-            inizializzaMenu("Pizza", pizzeLette);
-            inizializzaMenu("Panino", paniniLetti);
-            inizializzaMenu("Bibite", bibiteLette);
-            inizializzaMenu("Stuzzicheria", stuzzicherieLette);
-
-        } catch (InterruptedException | ExecutionException e) {
-            System.err.println("MainActivity: errore nell'esecuzione dei thread per la comunicazione col db.");
-        }
+        ListeProdotti.letturaProdotti();
 
         Button btnRiepilogo = (Button) findViewById(R.id.btnMainRiepilogo);
         btnRiepilogo.setOnClickListener(new View.OnClickListener() {
@@ -92,33 +76,5 @@ public class ActivityMain extends AppCompatActivity {
         super.onResume();
         Button btnRiepilogo = (Button) findViewById(R.id.btnMainRiepilogo);
         MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
-    }
-
-    private void inizializzaMenu(String categoria, String stringa) {
-        String[] righeLette = stringa.split(":");
-        for (int i = 0; i < righeLette.length; i++) {
-            int id;
-            String nome, descrizione;
-            double costo;
-            System.out.println(righeLette[i]);
-            String[] rigaSplit = righeLette[i].split(";");
-            id = Integer.parseInt(rigaSplit[0]);
-            nome = rigaSplit[1];
-            costo = Double.parseDouble(rigaSplit[2]);
-            descrizione = rigaSplit[3];
-            if (categoria.equals("Pizza")) {
-                Prodotto daInserire = new Prodotto(id, nome, 1, descrizione, costo);
-                ListeProdotti.aggiungiPizza(daInserire);
-            } else if (categoria.equals("Panino")) {
-                Prodotto daInserire = new Prodotto(id, nome, 2, descrizione, costo);
-                ListeProdotti.aggiungiPanino(daInserire);
-            } else if (categoria.equals("Bibite")) {
-                Prodotto daInserire = new Prodotto(id, nome, 3, descrizione, costo);
-                ListeProdotti.aggiungiBibita(daInserire);
-            } else if (categoria.equals("Stuzzicheria")) {
-                Prodotto daInserire = new Prodotto(id, nome, 4, descrizione, costo);
-                ListeProdotti.aggiungiStuzzicheria(daInserire);
-            }
-        }
     }
 }
