@@ -10,91 +10,80 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.net.URISyntaxException;
 
 // PER LA COMUNICAZIONE: https://www.tutorialspoint.com/android/android_php_mysql.htm
-// PER LA DECODIFICAZIONE JSON: https://stackoverflow.com/questions/16574482/decoding-json-string-in-java
 
 public class OperazioniDB extends AsyncTask<String, String, String> {
-    private int operazione = 0;
-    private String categoria, risultato;
+    private int operazione;
+    private String risultato;
 
     public OperazioniDB(int op) {
-        operazione = op;
-        categoria = "";
+        this.operazione = op;
+        risultato = "";
     }
 
-    // operazione 0 = leggere menù
-
-    protected void onPreExecute() {
-    }
+    // Operazione 0 = leggere menù
+    // Operazione 1 = aggiungere ordine
 
     @Override
     protected String doInBackground(String... arg0) {
-        if (operazione == 0) { // leggere menù
-            try {
-                categoria = (String) arg0[0];
-                String link = "http://progettopizza.altervista.org/leggiMenu.php?categoria=" + categoria;
-
-                URL url = new URL(link);
-                HttpClient client = new DefaultHttpClient();
-                HttpGet request = new HttpGet();
-                request.setURI(new URI(link));
-                HttpResponse response = client.execute(request);
-                BufferedReader in = new BufferedReader(new
-                        InputStreamReader(response.getEntity().getContent()));
-
-                StringBuffer sb = new StringBuffer("");
-                String line = "";
-
-                while ((line = in.readLine()) != null) {
-                    sb.append(line);
-                    break;
-                }
-                in.close();
-                risultato = sb.toString();
-                return risultato;
-            } catch (Exception e) {
-                return new String("Eccezione: " + e.getMessage());
-            }
+        if (operazione == 0) { // Leggi menù
+            String categoria = arg0[0];
+            String link = "http://progettopizza.altervista.org/leggiMenu.php?categoria=" + categoria;
+            risultato = richiestaHttp(link);
+            return risultato;
+        } else if (operazione == 1) { // Aggiungi ordine
+            String codice = arg0[0];
+            String asporto = arg0[1];
+            String costoTot = arg0[2];
+            String dataOra = arg0[3];
+            String ordine = arg0[4];
+            String link = "http://progettopizza.altervista.org/aggiungiOrdine.php?codice=" + codice + "&asporto=" + asporto
+                    + "&costoTot=" + costoTot + "&dataOra=" + dataOra + "&ordine=" + ordine;
+            risultato = richiestaHttp(link);
+            return risultato;
         } else return null;
     }
 
     @Override
-    protected void onPostExecute(String result){
-        switch(operazione){
+    protected void onPostExecute(String result) {
+        switch (operazione) {
             case 0: // lettura menù
                 System.out.println("OperazioniDB: Menù letto con successo.");
+                break;
+            case 1: // aggiunta ordine
+                System.out.println("OperazioniDB: Ordine aggiunto con successo.");
                 break;
         }
     }
 
-    // Metodo con il JSON non funzionante, alternativa con split normale
-    /*
-    @Override
-    protected void onPostExecute(String result) {
-        //String jsonString = "{\"prodotti\": { \"id\": \"\", \"prodotto\": \"\", \"costo\": \"\", \"descrizione\": \"\"}}";
-        String jsonString = risultato;
-        JSONObject jsonObject = null;
+    private String richiestaHttp(String link) {
+        String ris;
         try {
-            jsonObject = new JSONObject(jsonString);
-            JSONObject newJSON = jsonObject.getJSONObject("prodotti");
-            System.out.println(newJSON.toString());
-            jsonObject = new JSONObject(newJSON.toString());
-            System.out.println(jsonObject.getString("id"));
-            System.out.println(jsonObject.getString("prodotto"));
-            System.out.println(jsonObject.getString("costo"));
-            System.out.println(jsonObject.getString("descrizione"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (categoria.equals("Pizze")) {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet richiesta = new HttpGet();
+            richiesta.setURI(new URI(link));
+            HttpResponse risposta;
+            risposta = client.execute(richiesta);
+            BufferedReader in = new BufferedReader(new
+                    InputStreamReader(risposta.getEntity().getContent()));
 
+            StringBuffer sb = new StringBuffer("");
+            String linea;
+
+            while ((linea = in.readLine()) != null) {
+                sb.append(linea);
+                break;
+            }
+            in.close();
+            ris = sb.toString();
+        } catch (IOException | URISyntaxException e) {
+            return "Eccezione: " + e.getMessage();
         }
-    } */
+        return ris;
+    }
 }

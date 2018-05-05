@@ -11,10 +11,16 @@ public class ProdottiScelti {
 
     // In questi vettori salvo solo gli ID prodotto così che poi vengano prelevati i dettagli dai vettori già esistenti
 
-    private static List<Integer> pizzeScelte = new ArrayList<Integer>(); // cat 1
-    private static List<Integer> paniniScelti = new ArrayList<Integer>(); // cat 2
-    private static List<Integer> bibiteScelte = new ArrayList<Integer>(); // cat 3
-    private static List<Integer> stuzzicherieScelte = new ArrayList<Integer>(); // cat 4
+    private static List<Integer> pizzeScelte = new ArrayList<>(); // cat 1
+    private static List<Integer> paniniScelti = new ArrayList<>(); // cat 2
+    private static List<Integer> bibiteScelte = new ArrayList<>(); // cat 3
+    private static List<Integer> stuzzicherieScelte = new ArrayList<>(); // cat 4
+
+    private static boolean asporto;
+
+    public ProdottiScelti(){
+        asporto = false;
+    }
 
     public static void aggiungiProdotto(int idProdotto, int categoria) {
         switch (categoria) {
@@ -44,7 +50,7 @@ public class ProdottiScelti {
                         trovato = true;
                     }
                     i++;
-                } while (i < pizzeScelte.size() && trovato == false);
+                } while (i < pizzeScelte.size() && !trovato);
                 break;
             case 2:
                 do {
@@ -53,7 +59,7 @@ public class ProdottiScelti {
                         trovato = true;
                     }
                     i++;
-                } while (i < paniniScelti.size() && trovato == false);
+                } while (i < paniniScelti.size() && !trovato);
                 break;
             case 3:
                 do {
@@ -62,7 +68,7 @@ public class ProdottiScelti {
                         trovato = true;
                     }
                     i++;
-                } while (i < bibiteScelte.size() && trovato == false);
+                } while (i < bibiteScelte.size() && !trovato);
                 break;
             case 4:
                 do {
@@ -71,7 +77,7 @@ public class ProdottiScelti {
                         trovato = true;
                     }
                     i++;
-                } while (i < stuzzicherieScelte.size() && trovato == false);
+                } while (i < stuzzicherieScelte.size() && !trovato);
                 break;
         }
     }
@@ -119,5 +125,29 @@ public class ProdottiScelti {
 
     public static List<Integer> getStuzzicherieScelte() {
         return stuzzicherieScelte;
+    }
+
+    public static int getPizza(int pos){
+        return pizzeScelte.get(pos);
+    }
+
+    public static int getPanino(int pos){
+        return paniniScelti.get(pos);
+    }
+
+    public static int getBibita(int pos){
+        return bibiteScelte.get(pos);
+    }
+
+    public static int getStuzzicheria(int pos){
+        return pizzeScelte.get(pos);
+    }
+
+    public static void setAsporto(boolean val){
+        asporto = val;
+    }
+
+    public static boolean isAsporto(){
+        return asporto;
     }
 }

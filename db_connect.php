@@ -42,4 +42,4 @@ class DB_CONNECT {
         mysql_close();
     }
  
-}
+}

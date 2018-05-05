@@ -1,5 +1,6 @@
 package it.nava.progettopizza;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -15,11 +16,13 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class ActivityBarcode extends AppCompatActivity {
-
-    boolean barcodeGenerato = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,24 @@ public class ActivityBarcode extends AppCompatActivity {
 
         // Genera un codice random
         String codice = generaCodice();
+
+        // Creazione stringa ordini
+        String ordine = creaStringaOrdine();
+
+        Double costoTot = 0.0; // DA CALCOLARE IN CENTESIMI E MANDARE IN CENTESIMI; SISTEMARE ANCHE IN PHP
+        // ANCHE LA BOOLEAN ASPORTO E' FITTIZIA E VA INSERITA NEL RIEPILOGO, SELEZIONABILE DALL'UTENTE
+
+        String asporto = "0";
+        if (ProdottiScelti.isAsporto())
+            asporto = "1";
+
+        OperazioniDB inviaOrdine = new OperazioniDB(1);
+        String dataOra = getDataOra();
+        try {
+            inviaOrdine.execute(codice, asporto, Double.toString(costoTot), dataOra, ordine).get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("ActivityBarcode: errore nell'invio dell'ordine al db.");
+        }
 
         ImageView imageView = (ImageView) findViewById(R.id.imgBarcode);
         try {
@@ -81,8 +102,35 @@ public class ActivityBarcode extends AppCompatActivity {
         Random rand = new Random();
         String codice = "";
         for (int i = 0; i < 8; i++) {
-            codice += rand.nextInt(10);
+            int gen = rand.nextInt(10);
+            while (i == 1 && gen == 0){
+                gen = rand.nextInt(10);
+            }
+            codice += gen;
         }
         return codice;
+    }
+
+    private String creaStringaOrdine(){
+        String ordine = "";
+        for (int i = 0; i < ProdottiScelti.getNumPizze(); i++){
+            ordine += ProdottiScelti.getPizza(i) + ",";
+        }
+        for (int i = 0; i < ProdottiScelti.getNumPanini(); i++){
+            ordine += ProdottiScelti.getPanino(i) + ",";
+        }
+        for (int i = 0; i < ProdottiScelti.getNumBibite(); i++){
+            ordine += ProdottiScelti.getBibita(i) + ",";
+        }
+        for (int i = 0; i < ProdottiScelti.getNumStuzzicherie(); i++){
+            ordine += ProdottiScelti.getStuzzicheria(i) + ",";
+        }
+        return ordine;
+    }
+
+    private String getDataOra(){
+        @SuppressLint("SimpleDateFormat") DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+        Date data = new Date();
+        return formatoData.format(data);
     }
 }

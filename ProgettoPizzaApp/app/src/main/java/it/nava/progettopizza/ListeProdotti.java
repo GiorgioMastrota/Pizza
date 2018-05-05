@@ -1,5 +1,7 @@
 package it.nava.progettopizza;
 
+import android.annotation.SuppressLint;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -8,10 +10,10 @@ public class ListeProdotti {
 
     private static String categorieProdotti[] = { "Pizza", "Panino", "Bibita", "Stuzzicheria" };
 
-    private static List<Prodotto> listaPizze = new ArrayList<Prodotto>(); // Categoria 1
-    private static List<Prodotto> listaPanini = new ArrayList<Prodotto>(); // Categoria 2
-    private static List<Prodotto> listaBibite = new ArrayList<Prodotto>(); // Categoria 3
-    private static List<Prodotto> listaStuzzicherie = new ArrayList<Prodotto>(); // Categoria 4
+    private static List<Prodotto> listaPizze = new ArrayList<>(); // Categoria 1
+    private static List<Prodotto> listaPanini = new ArrayList<>(); // Categoria 2
+    private static List<Prodotto> listaBibite = new ArrayList<>(); // Categoria 3
+    private static List<Prodotto> listaStuzzicherie = new ArrayList<>(); // Categoria 4
 
     public ListeProdotti(){
         letturaProdotti();
@@ -43,24 +45,32 @@ public class ListeProdotti {
             int id;
             String nome, descrizione;
             double costo;
-            System.out.println(righeLette[i]);
             String[] rigaSplit = righeLette[i].split(";");
             id = Integer.parseInt(rigaSplit[0]);
             nome = rigaSplit[1];
             costo = Double.parseDouble(rigaSplit[2]);
             descrizione = rigaSplit[3];
-            if (categoria.equals("Pizza")) {
-                Prodotto daInserire = new Prodotto(id, nome, 1, descrizione, costo);
-                aggiungiPizza(daInserire);
-            } else if (categoria.equals("Panino")) {
-                Prodotto daInserire = new Prodotto(id, nome, 2, descrizione, costo);
-                aggiungiPanino(daInserire);
-            } else if (categoria.equals("Bibite")) {
-                Prodotto daInserire = new Prodotto(id, nome, 3, descrizione, costo);
-                aggiungiBibita(daInserire);
-            } else if (categoria.equals("Stuzzicheria")) {
-                Prodotto daInserire = new Prodotto(id, nome, 4, descrizione, costo);
-                aggiungiStuzzicheria(daInserire);
+            switch (categoria) {
+                case "Pizza": {
+                    Prodotto daInserire = new Prodotto(id, nome, 1, descrizione, costo);
+                    aggiungiPizza(daInserire);
+                    break;
+                }
+                case "Panino": {
+                    Prodotto daInserire = new Prodotto(id, nome, 2, descrizione, costo);
+                    aggiungiPanino(daInserire);
+                    break;
+                }
+                case "Bibite": {
+                    Prodotto daInserire = new Prodotto(id, nome, 3, descrizione, costo);
+                    aggiungiBibita(daInserire);
+                    break;
+                }
+                case "Stuzzicheria": {
+                    Prodotto daInserire = new Prodotto(id, nome, 4, descrizione, costo);
+                    aggiungiStuzzicheria(daInserire);
+                    break;
+                }
             }
         }
     }
@@ -70,7 +80,6 @@ public class ListeProdotti {
     public static void aggiungiPizza(Prodotto prodotto){
         listaPizze.add(prodotto);
     }
-
     public static void aggiungiPanino(Prodotto prodotto){
         listaPanini.add(prodotto);
     }
@@ -93,6 +102,7 @@ public class ListeProdotti {
         return null;
     }
 
+    @SuppressLint("DefaultLocale")
     public static String getPrezzoPizza(int id){
         for (int i = 0; i < listaPizze.size(); i++){
             Prodotto pizza = listaPizze.get(i);
@@ -111,6 +121,7 @@ public class ListeProdotti {
         return null;
     }
 
+    @SuppressLint("DefaultLocale")
     public static String getPrezzoPanino(int id){
         for (int i = 0; i < listaPanini.size(); i++){
             Prodotto panino = listaPanini.get(i);
@@ -129,6 +140,7 @@ public class ListeProdotti {
         return null;
     }
 
+    @SuppressLint("DefaultLocale")
     public static String getPrezzoBibita(int id){
         for (int i = 0; i < listaBibite.size(); i++){
             Prodotto bibita = listaBibite.get(i);
@@ -148,6 +160,7 @@ public class ListeProdotti {
         return null;
     }
 
+    @SuppressLint("DefaultLocale")
     public static String getPrezzoStuzzicheria(int id){
         for (int i = 0; i < listaStuzzicherie.size(); i++){
             Prodotto stuzzicheria = listaStuzzicherie.get(i);
