@@ -35,7 +35,7 @@ public class ActivityBarcode extends AppCompatActivity {
         // Creazione stringa ordini
         String ordine = creaStringaOrdine();
 
-        Double costoTot = 0.0; // DA CALCOLARE IN CENTESIMI E MANDARE IN CENTESIMI; SISTEMARE ANCHE IN PHP
+        int costoTot = ProdottiScelti.getCostoTot();
         // ANCHE LA BOOLEAN ASPORTO E' FITTIZIA E VA INSERITA NEL RIEPILOGO, SELEZIONABILE DALL'UTENTE
 
         String asporto = "0";

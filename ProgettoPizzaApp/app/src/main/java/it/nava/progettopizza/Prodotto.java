@@ -14,7 +14,7 @@ public class Prodotto {
         this.costo = costo;
     }
 
-    // get e set
+    // Get e set
 
     public int getId() {
         return id;

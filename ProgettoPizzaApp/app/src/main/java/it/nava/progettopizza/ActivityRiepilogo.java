@@ -26,8 +26,18 @@ public class ActivityRiepilogo extends AppCompatActivity {
         final LinearLayout linearVerticale = (LinearLayout) findViewById(R.id.linearVerticale);
         final double larghPB = MetodiPubblici.getLarghezzaSchermo() / 5;
 
+        ProdottiScelti.calcolaCostoTot();
+        double prezzoDec = (double)(ProdottiScelti.getCostoTot()) / 100;
+
         for (int i = 1; i <= 4; i++)
             creaCampi(this, i, linearVerticale, larghPB);
+
+        // Prezzo totale
+        TextView prezzoTot = new TextView(this);
+        prezzoTot.setText("Totale: " + String.format("%.2f", prezzoDec) + "€");
+        prezzoTot.setTypeface(null, Typeface.BOLD);
+        prezzoTot.setGravity(Gravity.RIGHT);
+        linearVerticale.addView(prezzoTot);
 
         // Bottone per la generazione del barcode
         Button btnGenera = (Button)findViewById(R.id.btnGenera);
