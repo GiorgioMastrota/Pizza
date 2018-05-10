@@ -36,7 +36,6 @@ public class ActivityBarcode extends AppCompatActivity {
         String ordine = creaStringaOrdine();
 
         int costoTot = ProdottiScelti.getCostoTot();
-        // ANCHE LA BOOLEAN ASPORTO E' FITTIZIA E VA INSERITA NEL RIEPILOGO, SELEZIONABILE DALL'UTENTE
 
         String asporto = "0";
         if (ProdottiScelti.isAsporto())

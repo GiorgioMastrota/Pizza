@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,11 @@ public class ActivityRiepilogo extends AppCompatActivity {
         prezzoTot.setGravity(Gravity.RIGHT);
         linearVerticale.addView(prezzoTot);
 
+        // Checkbox asporto
+        final CheckBox ch = new CheckBox(this);
+        ch.setText("D'asporto");
+        linearVerticale.addView(ch);
+
         // Spazio vuoto per evitare sovrapposizione bottone Conferma
         TextView textVuoto = new TextView(this);
         LinearLayout.LayoutParams lpVuoto = new LinearLayout.LayoutParams(
@@ -53,6 +59,8 @@ public class ActivityRiepilogo extends AppCompatActivity {
         Button btnGenera = (Button)findViewById(R.id.btnGenera);
         btnGenera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (ch.isChecked())
+                    ProdottiScelti.setAsporto(true);
                 startActivity(new Intent(ActivityRiepilogo.this, ActivityBarcode.class));
             }
         });
