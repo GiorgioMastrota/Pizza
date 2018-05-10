@@ -30,7 +30,7 @@ public class ActivityBarcode extends AppCompatActivity {
         setContentView(R.layout.activity_barcode);
 
         // Genera un codice random
-        String codice = generaCodice();
+        final String codice = generaCodice();
 
         // Creazione stringa ordini
         String ordine = creaStringaOrdine();
@@ -62,8 +62,13 @@ public class ActivityBarcode extends AppCompatActivity {
         Button btnAnnullaOrdine = (Button)findViewById(R.id.btnAnnullaOrdine);
         btnAnnullaOrdine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ProdottiScelti.annullaOrdine();
-                // MANCA mandare al database che l'ordine è stato annullato
+                ProdottiScelti.annullaOrdine(); // Leva tutto dal vettore dell'app
+                OperazioniDB annullaOrdine = new OperazioniDB(2);
+                try {
+                    annullaOrdine.execute(codice).get();
+                } catch (InterruptedException | ExecutionException e) {
+                    System.err.println("Errore nell'annullamento dell'ordine.");
+                }
                 startActivity(new Intent(ActivityBarcode.this, ActivityMain.class));
             }
         });

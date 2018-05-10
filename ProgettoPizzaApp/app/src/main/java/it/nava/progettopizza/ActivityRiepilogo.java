@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 public class ActivityRiepilogo extends AppCompatActivity {
 
@@ -38,6 +39,15 @@ public class ActivityRiepilogo extends AppCompatActivity {
         prezzoTot.setTypeface(null, Typeface.BOLD);
         prezzoTot.setGravity(Gravity.RIGHT);
         linearVerticale.addView(prezzoTot);
+
+        // Spazio vuoto per evitare sovrapposizione bottone Conferma
+        TextView textVuoto = new TextView(this);
+        LinearLayout.LayoutParams lpVuoto = new LinearLayout.LayoutParams(
+                MetodiPubblici.getAltezzaSchermo() / 11, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+        textVuoto.setLayoutParams(lpVuoto);
+        textVuoto.setText(" ");
+        textVuoto.setTextSize(34);
+        linearVerticale.addView(textVuoto);
 
         // Bottone per la generazione del barcode
         Button btnGenera = (Button)findViewById(R.id.btnGenera);
@@ -75,14 +85,13 @@ public class ActivityRiepilogo extends AppCompatActivity {
 
         String nomeProd = "", prezzo = "";
 
-        for (int i = partenza; i < dimVettore; i++){
+        for (int i = partenza; i < dimVettore; i++) {
             int idProd = 0;
-            if (i == -1){
+            if (i == -1) {
                 nomeProd = nomePrimoCampo;
                 prezzo = "";
-            }
-            else{
-                switch(categoria) {
+            } else {
+                switch (categoria) {
                     case 1:
                         idProd = ProdottiScelti.getPizzeScelte().get(i);
                         nomeProd = ListeProdotti.getNomePizza(idProd);
@@ -90,7 +99,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
                         break;
                     case 2:
                         idProd = ProdottiScelti.getPaniniScelti().get(i);
-                        nomeProd =ListeProdotti.getNomePanino(idProd);
+                        nomeProd = ListeProdotti.getNomePanino(idProd);
                         prezzo = ListeProdotti.getPrezzoPanino(idProd) + "€";
                         break;
                     case 3:
@@ -131,8 +140,8 @@ public class ActivityRiepilogo extends AppCompatActivity {
             prezzoProdotto.setText(prezzo);
             if (i == -1)
                 prezzoProdotto.setTypeface(null, Typeface.BOLD);
-                    LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
-                            (int)larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
+            LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
+                    (int) larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
             prezzoProdotto.setGravity(Gravity.CENTER);
             lpNome.setMargins(0, 0, 0, 0);
             nomeProdotto.setLayoutParams(lpPrezzo);
@@ -145,7 +154,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
                 btn.setText("X");
                 LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                lpBtn.setMargins(0, 0, 3, 0);
+                lpBtn.setMargins(0, 0, 0, 0);
                 btn.setLayoutParams(lpBtn);
                 ll.addView(btn);
 

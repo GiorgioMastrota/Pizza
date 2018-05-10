@@ -28,6 +28,7 @@ public class OperazioniDB extends AsyncTask<String, String, String> {
 
     // Operazione 0 = leggere menù
     // Operazione 1 = aggiungere ordine
+    // Operazione 2 = annulla ordine
 
     @Override
     protected String doInBackground(String... arg0) {
@@ -44,6 +45,11 @@ public class OperazioniDB extends AsyncTask<String, String, String> {
             String ordine = arg0[4];
             String link = "http://progettopizza.altervista.org/aggiungiOrdine.php?codice=" + codice + "&asporto=" + asporto
                     + "&costoTot=" + costoTot + "&dataOra=" + dataOra + "&ordine=" + ordine;
+            risultato = richiestaHttp(link);
+            return risultato;
+        } else if (operazione == 2) {
+            String codice = arg0[0];
+            String link = "http://progettopizza.altervista.org/annullaOrdine.php?codice=" + codice;
             risultato = richiestaHttp(link);
             return risultato;
         } else return null;
