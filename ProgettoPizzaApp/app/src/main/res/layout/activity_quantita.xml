@@ -9,34 +9,30 @@
     android:orientation="vertical"
     tools:context="it.nava.progettopizza.ActivityQuantita">
 
-        <TextView
-            android:id="@+id/textQuantita"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/strQuantita"
-            android:textAlignment="center"
-            android:textColor="@color/nero"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textQuantita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/strQuantita"
+        android:textAlignment="center"
+        android:textColor="@color/nero"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/editQuantita"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
-            android:ems="10"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:textColor="@color/nero" />
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textQuantita"
+        android:gravity="center" />
 
-        <Button
-            android:id="@+id/btnConferma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/verdeBrutto"
-            android:shadowColor="@color/verdeBrutto"
-            android:text="@string/strConferma"
-            android:textColor="@color/nero" />
+    <Button
+        android:id="@+id/btnConferma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/verdeBrutto"
+        android:shadowColor="@color/verdeBrutto"
+        android:text="@string/strConferma"
+        android:textColor="@color/nero" />
 
 </LinearLayout>

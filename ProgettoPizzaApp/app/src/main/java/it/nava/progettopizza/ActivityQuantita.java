@@ -1,14 +1,17 @@
 package it.nava.progettopizza;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,8 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 public class ActivityQuantita extends AppCompatActivity {
+
+    static int valore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,28 @@ public class ActivityQuantita extends AppCompatActivity {
 
         getWindow().setLayout((int)(MetodiPubblici.getLarghezzaSchermo() * 0.7), LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        final EditText editQuant = (EditText)findViewById(R.id.editQuantita);
+        final TextView tv = (TextView) findViewById(R.id.textQuantita);
+        NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
+
+        tv.setGravity(Gravity.CENTER);
+        np.setGravity(Gravity.CENTER);
+
+        //Set TextView text color
+        tv.setTextColor(Color.BLACK);
+
+        np.setMinValue(1);
+        np.setMaxValue(50);
+
+        np.setWrapSelectorWheel(true);
+
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int valVecchio, int valNuovo){
+                valore = valNuovo;
+                tv.setText("Quantità");
+            }
+        });
+
         LinearLayout.LayoutParams eqL = new LinearLayout.LayoutParams(
                 MetodiPubblici.getLarghezzaSchermo() / 5, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -35,9 +61,7 @@ public class ActivityQuantita extends AppCompatActivity {
         btnConferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText quantita = (EditText)findViewById(R.id.editQuantita);
-                int quantitaScelta = Integer.parseInt(quantita.getText().toString());
-                for (int i = 0; i < quantitaScelta; i++) {
+                for (int i = 0; i < valore; i++) {
                     ProdottiScelti.aggiungiProdotto(idProdotto, idCategoria);
                 }
                     Toast toast = Toast.makeText(getApplicationContext(), "Prodotto aggiunto.", Toast.LENGTH_SHORT);
