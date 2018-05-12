@@ -35,9 +35,6 @@ public class ActivityQuantita extends AppCompatActivity {
         final TextView tv = (TextView) findViewById(R.id.textQuantita);
         NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
 
-        tv.setGravity(Gravity.CENTER);
-        np.setGravity(Gravity.CENTER);
-
         //Set TextView text color
         tv.setTextColor(Color.BLACK);
 
