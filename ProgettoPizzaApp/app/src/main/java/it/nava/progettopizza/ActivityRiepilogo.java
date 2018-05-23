@@ -29,7 +29,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
         final double larghPB = MetodiPubblici.getLarghezzaSchermo() / 5;
 
         ProdottiScelti.calcolaCostoTot();
-        double prezzoDec = (double)(ProdottiScelti.getCostoTot()) / 100;
+        double prezzoDec = (double) (ProdottiScelti.getCostoTot()) / 100;
 
         for (int i = 1; i <= 4; i++)
             creaCampi(this, i, linearVerticale, larghPB);
@@ -56,7 +56,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
         linearVerticale.addView(textVuoto);
 
         // Bottone per la generazione del barcode
-        Button btnGenera = (Button)findViewById(R.id.btnGenera);
+        Button btnGenera = (Button) findViewById(R.id.btnGenera);
         btnGenera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (ch.isChecked())
@@ -66,10 +66,10 @@ public class ActivityRiepilogo extends AppCompatActivity {
         });
     }
 
-    public void creaCampi(Context contesto, final int categoria, LinearLayout layout, double larghPB){
+    public void creaCampi(Context contesto, final int categoria, LinearLayout layout, double larghPB) {
         String nomePrimoCampo = "";
         int dimVettore = 0, partenza = -1;
-        switch(categoria){
+        switch (categoria) {
             case 1:
                 nomePrimoCampo = "Pizze";
                 dimVettore = ProdottiScelti.getNumPizze();
@@ -103,22 +103,22 @@ public class ActivityRiepilogo extends AppCompatActivity {
                     case 1:
                         idProd = ProdottiScelti.getPizzeScelte().get(i);
                         nomeProd = ListeProdotti.getNomePizza(idProd);
-                        prezzo = ListeProdotti.getPrezzoPizza(idProd) + "€";
+                        prezzo = Double.toString(ListeProdotti.getPrezzoPizza(idProd));
                         break;
                     case 2:
                         idProd = ProdottiScelti.getPaniniScelti().get(i);
                         nomeProd = ListeProdotti.getNomePanino(idProd);
-                        prezzo = ListeProdotti.getPrezzoPanino(idProd) + "€";
+                        prezzo = Double.toString(ListeProdotti.getPrezzoPanino(idProd));
                         break;
                     case 3:
                         idProd = ProdottiScelti.getBibiteScelte().get(i);
                         nomeProd = ListeProdotti.getNomeBibita(idProd);
-                        prezzo = ListeProdotti.getPrezzoBibita(idProd) + "€";
+                        prezzo = Double.toString(ListeProdotti.getPrezzoBibita(idProd));
                         break;
                     case 4:
                         idProd = ProdottiScelti.getStuzzicherieScelte().get(i);
                         nomeProd = ListeProdotti.getNomeStuzzicheria(idProd);
-                        prezzo = ListeProdotti.getPrezzoStuzzicheria(idProd) + "€";
+                        prezzo = Double.toString(ListeProdotti.getPrezzoStuzzicheria(idProd));
                         break;
                 }
             }
@@ -143,19 +143,19 @@ public class ActivityRiepilogo extends AppCompatActivity {
             nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
 
-            // Prezzo
-            TextView prezzoProdotto = new TextView(contesto);
-            prezzoProdotto.setText(prezzo);
-            if (i == -1)
-                prezzoProdotto.setTypeface(null, Typeface.BOLD);
-            LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
-                    (int) larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
-            prezzoProdotto.setGravity(Gravity.CENTER);
-            lpNome.setMargins(0, 0, 0, 0);
-            nomeProdotto.setLayoutParams(lpPrezzo);
-            ll.addView(prezzoProdotto);
-
             if (i != -1) {
+                // Prezzo
+                TextView prezzoProdotto = new TextView(contesto);
+                prezzoProdotto.setText(String.format("%.2f", Double.parseDouble(prezzo)) + "€");
+                if (i == -1)
+                    prezzoProdotto.setTypeface(null, Typeface.BOLD);
+                LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
+                        (int) larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
+                prezzoProdotto.setGravity(Gravity.CENTER);
+                lpNome.setMargins(0, 0, 0, 0);
+                nomeProdotto.setLayoutParams(lpPrezzo);
+                ll.addView(prezzoProdotto);
+
                 // Bottone di rimozione
                 final Button btn = new Button(contesto);
                 btn.setId(idProd);

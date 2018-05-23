@@ -94,22 +94,22 @@ public class ProdottiScelti {
     public static void calcolaCostoTot(){
         costoTot = 0;
         for (int i = 0; i < pizzeScelte.size(); i++){
-            Double prezzo = Double.parseDouble(ListeProdotti.getPrezzoPizza(pizzeScelte.get(i)));
+            Double prezzo = ListeProdotti.getPrezzoPizza(pizzeScelte.get(i));
             int prezzoInt = (int)(prezzo * 100);
             costoTot += prezzoInt;
         }
         for (int i = 0; i < paniniScelti.size(); i++){
-            Double prezzo = Double.parseDouble(ListeProdotti.getPrezzoPanino(paniniScelti.get(i)));
+            Double prezzo = ListeProdotti.getPrezzoPanino(paniniScelti.get(i));
             int prezzoInt = (int)(prezzo * 100);
             costoTot += prezzoInt;
         }
         for (int i = 0; i < bibiteScelte.size(); i++){
-            Double prezzo = Double.parseDouble(ListeProdotti.getPrezzoBibita(bibiteScelte.get(i)));
+            Double prezzo = ListeProdotti.getPrezzoBibita(bibiteScelte.get(i));
             int prezzoInt = (int)(prezzo * 100);
             costoTot += prezzoInt;
         }
         for (int i = 0; i < stuzzicherieScelte.size(); i++){
-            Double prezzo = Double.parseDouble(ListeProdotti.getPrezzoStuzzicheria(stuzzicherieScelte.get(i)));
+            Double prezzo = ListeProdotti.getPrezzoStuzzicheria(stuzzicherieScelte.get(i));
             int prezzoInt = (int)(prezzo * 100);
             costoTot += prezzoInt;
         }
@@ -170,7 +170,7 @@ public class ProdottiScelti {
     }
 
     public static int getStuzzicheria(int pos){
-        return pizzeScelte.get(pos);
+        return stuzzicherieScelte.get(pos);
     }
 
     public static void setAsporto(boolean val){

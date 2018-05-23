@@ -103,13 +103,13 @@ public class ListeProdotti {
     }
 
     @SuppressLint("DefaultLocale")
-    public static String getPrezzoPizza(int id){
+    public static double getPrezzoPizza(int id){
         for (int i = 0; i < listaPizze.size(); i++){
             Prodotto pizza = listaPizze.get(i);
             if (pizza.getId() == id)
-                return String.format("%.2f", pizza.getCosto());
+                return pizza.getCosto();
         }
-        return null;
+        return 0.0;
     }
 
     public static String getNomePanino(int id){
@@ -122,13 +122,13 @@ public class ListeProdotti {
     }
 
     @SuppressLint("DefaultLocale")
-    public static String getPrezzoPanino(int id){
+    public static double getPrezzoPanino(int id){
         for (int i = 0; i < listaPanini.size(); i++){
             Prodotto panino = listaPanini.get(i);
             if (panino.getId() == id)
-                return String.format("%.2f", panino.getCosto());
+                return panino.getCosto();
         }
-        return null;
+        return 0.0;
     }
 
     public static String getNomeBibita(int id){
@@ -141,13 +141,13 @@ public class ListeProdotti {
     }
 
     @SuppressLint("DefaultLocale")
-    public static String getPrezzoBibita(int id){
+    public static double getPrezzoBibita(int id){
         for (int i = 0; i < listaBibite.size(); i++){
             Prodotto bibita = listaBibite.get(i);
             if (bibita.getId() == id)
-                return String.format("%.2f", bibita.getCosto());
+                return bibita.getCosto();
         }
-        return null;
+        return 0.0;
     }
 
 
@@ -161,13 +161,13 @@ public class ListeProdotti {
     }
 
     @SuppressLint("DefaultLocale")
-    public static String getPrezzoStuzzicheria(int id){
+    public static double getPrezzoStuzzicheria(int id){
         for (int i = 0; i < listaStuzzicherie.size(); i++){
             Prodotto stuzzicheria = listaStuzzicherie.get(i);
             if (stuzzicheria.getId() == id)
-                return String.format("%.2f", stuzzicheria.getCosto());
+                return stuzzicheria.getCosto();
         }
-        return null;
+        return 0.0;
     }
 
     public static List<Prodotto> getListaPizze() {
