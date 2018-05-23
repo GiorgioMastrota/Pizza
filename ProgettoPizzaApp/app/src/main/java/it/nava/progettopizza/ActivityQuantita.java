@@ -38,7 +38,7 @@ public class ActivityQuantita extends AppCompatActivity {
         //Set TextView text color
         tv.setTextColor(Color.BLACK);
 
-        np.setMinValue(1);
+        np.setMinValue(0);
         np.setMaxValue(10);
 
         np.setWrapSelectorWheel(true);

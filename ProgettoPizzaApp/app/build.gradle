@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "it.nava.progettopizza"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
-    implementation files('libs/mysql-connector-java-8.0.11.jar')
-    implementation files('libs/mysql-connector-java-8.0.11.jar')
 }
