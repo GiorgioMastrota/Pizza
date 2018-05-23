@@ -6,16 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
 public class ActivityMain extends AppCompatActivity {
+
+    static LinearLayout linearPrincipale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Pizzeria Ismail El Abiad");
+
+        linearPrincipale = (LinearLayout) findViewById(R.id.mainLayoutPrincipale);
 
         ListeProdotti.letturaProdotti();
 
@@ -75,6 +81,15 @@ public class ActivityMain extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Button btnRiepilogo = (Button) findViewById(R.id.btnMainRiepilogo);
-        MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo);
+        if(MetodiPubblici.controlloBtnInvisibile(ActivityMain.this, btnRiepilogo)){
+            // Spazio vuoto per evitare sovrapposizione bottone Riepilogo
+            TextView textVuoto = new TextView(this);
+            LinearLayout.LayoutParams lpVuoto = new LinearLayout.LayoutParams(
+                    MetodiPubblici.getAltezzaSchermo() / 11, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+            textVuoto.setLayoutParams(lpVuoto);
+            textVuoto.setText(" ");
+            textVuoto.setTextSize(34);
+            linearPrincipale.addView(textVuoto);
+        }
     }
 }

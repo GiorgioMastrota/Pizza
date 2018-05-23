@@ -29,11 +29,16 @@ public class MetodiPubblici {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 
-    public static void controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
+    public static boolean controlloBtnInvisibile(AppCompatActivity activity, Button bottone){
         int nTotProd = ProdottiScelti.getGrandezzaTotale();
-        if (nTotProd == 0 && bottone.getVisibility() == View.VISIBLE)
+        if (nTotProd == 0 && bottone.getVisibility() == View.VISIBLE) {
             bottone.setVisibility(View.GONE);
-        else if (nTotProd != 0 && bottone.getVisibility() == View.GONE)
+            return false;
+        }
+        else if (nTotProd != 0 && bottone.getVisibility() == View.GONE) {
             bottone.setVisibility(View.VISIBLE);
+            return true;
+        }
+        else return false;
     }
 }
