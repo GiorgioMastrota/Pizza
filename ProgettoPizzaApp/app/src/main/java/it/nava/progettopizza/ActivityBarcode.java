@@ -121,7 +121,7 @@ public class ActivityBarcode extends AppCompatActivity {
     }
 
     private String getDataOra() {
-        @SuppressLint("SimpleDateFormat") DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat formatoData = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         Date data = new Date();
         return formatoData.format(data);
     }
