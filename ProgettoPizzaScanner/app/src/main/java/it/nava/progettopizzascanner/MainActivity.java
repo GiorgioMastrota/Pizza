@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 
+import java.util.concurrent.ExecutionException;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
@@ -124,13 +126,24 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result result) {
-        final String myResult = result.getText();
+        final String codiceLetto = result.getText();
         Log.d("QRCodeScanner", result.getText());
         Log.d("QRCodeScanner", result.getBarcodeFormat().toString());
 
+        OperazioniDB conferma = new OperazioniDB();
+        try {
+            String stringaOrdine = conferma.execute(codiceLetto).get();
+            Intent intentScontrino = new Intent(MainActivity.this, ScontrinoActivity.class);
+            intentScontrino.putExtra("stringaOrdine", stringaOrdine);
+            startActivity(intentScontrino);
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("MainActivity: errore nella ricezione della conferma.");
+        }
+
+        /* CON IL DIALOG CON I DUE BOTTONI
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Risultato");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Chiudi", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 scannerView.resumeCameraPreview(MainActivity.this);
@@ -139,12 +152,13 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         builder.setNeutralButton("Conferma ordine", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myResult));
-                startActivity(browserIntent);
+                OperazioniDB conferma = new OperazioniDB();
+                conferma.execute(codiceLetto);
             }
         });
         builder.setMessage(result.getText());
         AlertDialog alert1 = builder.create();
         alert1.show();
+        */
     }
 }

@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">ProgettoPizzaScanner</string>
+    <string name="app_name">Pizzeria - Scanner</string>
+    <string name="strNomePizzeria">Pizzeria</string>
+    <string name="strVia">Via IV Novembre, 52 - Mariano Comense (CO)</string>
 </resources>
