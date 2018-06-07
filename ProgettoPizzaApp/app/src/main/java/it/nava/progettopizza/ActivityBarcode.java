@@ -15,6 +15,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,15 +51,11 @@ public class ActivityBarcode extends AppCompatActivity {
         }
 
         ImageView imageView = (ImageView) findViewById(R.id.imgBarcode);
-        try {
-            Bitmap bitmap = codificaBitmap(codice);
-            imageView.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+        Bitmap bitmap = codificaBitmap(codice);
+        imageView.setImageBitmap(bitmap);
 
         // Bottone per l'annullamento dell'ordine
-        Button btnAnnullaOrdine = (Button)findViewById(R.id.btnAnnullaOrdine);
+        Button btnAnnullaOrdine = (Button) findViewById(R.id.btnAnnullaOrdine);
         btnAnnullaOrdine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ProdottiScelti.annullaOrdine(); // Leva tutto dal vettore dell'app
@@ -79,35 +76,26 @@ public class ActivityBarcode extends AppCompatActivity {
         Toast.makeText(this, "Annulla l'ordine per tornare indietro.", Toast.LENGTH_SHORT).show();
     }
 
-    Bitmap codificaBitmap(String str) throws WriterException {
-        BitMatrix risultato;
+    Bitmap codificaBitmap(String str) {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            risultato = new MultiFormatWriter().encode(str,
-                    BarcodeFormat.EAN_8, MetodiPubblici.getLarghezzaSchermo() / 2, 200, null);
-        } catch (IllegalArgumentException iae) {
-            // Formato non supportato
+            int largh = MetodiPubblici.getLarghezzaSchermo() / 2;
+            BitMatrix bitMatrix = multiFormatWriter.encode(str, BarcodeFormat.QR_CODE, largh, largh);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            return bitmap;
+        } catch (Exception e) {
+            System.out.println("ActivityBarcode: Errore nella generazione del codice a barre.");
             return null;
         }
-        int w = risultato.getWidth();
-        int h = risultato.getHeight();
-        int[] pixels = new int[w * h];
-        for (int y = 0; y < h; y++) {
-            int offset = y * w;
-            for (int x = 0; x < w; x++) {
-                pixels[offset + x] = risultato.get(x, y) ? Color.BLACK : Color.WHITE;
-            }
-        }
-        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, MetodiPubblici.getLarghezzaSchermo() / 2, 0, 0, w, h);
-        return bitmap;
     }
 
-    private String generaCodice(){
+    private String generaCodice() {
         Random rand = new Random();
         String codice = "";
         for (int i = 0; i < 8; i++) {
             int gen = rand.nextInt(10);
-            while (i == 1 && gen == 0){
+            while (i == 0 && gen == 0) {
                 gen = rand.nextInt(10);
             }
             codice += gen;
@@ -115,24 +103,24 @@ public class ActivityBarcode extends AppCompatActivity {
         return codice;
     }
 
-    private String creaStringaOrdine(){
+    private String creaStringaOrdine() {
         String ordine = "";
-        for (int i = 0; i < ProdottiScelti.getNumPizze(); i++){
+        for (int i = 0; i < ProdottiScelti.getNumPizze(); i++) {
             ordine += ProdottiScelti.getPizza(i) + ",";
         }
-        for (int i = 0; i < ProdottiScelti.getNumPanini(); i++){
+        for (int i = 0; i < ProdottiScelti.getNumPanini(); i++) {
             ordine += ProdottiScelti.getPanino(i) + ",";
         }
-        for (int i = 0; i < ProdottiScelti.getNumBibite(); i++){
+        for (int i = 0; i < ProdottiScelti.getNumBibite(); i++) {
             ordine += ProdottiScelti.getBibita(i) + ",";
         }
-        for (int i = 0; i < ProdottiScelti.getNumStuzzicherie(); i++){
+        for (int i = 0; i < ProdottiScelti.getNumStuzzicherie(); i++) {
             ordine += ProdottiScelti.getStuzzicheria(i) + ",";
         }
         return ordine;
     }
 
-    private String getDataOra(){
+    private String getDataOra() {
         @SuppressLint("SimpleDateFormat") DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         Date data = new Date();
         return formatoData.format(data);

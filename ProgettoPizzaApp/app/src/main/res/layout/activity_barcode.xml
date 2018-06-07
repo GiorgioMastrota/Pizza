@@ -5,6 +5,7 @@
     android:id="@+id/lbPrincipale"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bianco"
     tools:context="it.nava.progettopizza.ActivityBarcode">
 
     <LinearLayout
