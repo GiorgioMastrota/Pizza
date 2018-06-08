@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ListaProdotti.letturaProdotti();
+
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
         int currentApiVersion = Build.VERSION.SDK_INT;
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         Log.d("QRCodeScanner", result.getText());
         Log.d("QRCodeScanner", result.getBarcodeFormat().toString());
 
-        OperazioniDB conferma = new OperazioniDB();
+        OperazioniDB conferma = new OperazioniDB(1);
         try {
             String stringaOrdine = conferma.execute(codiceLetto).get();
             Intent intentScontrino = new Intent(MainActivity.this, ScontrinoActivity.class);

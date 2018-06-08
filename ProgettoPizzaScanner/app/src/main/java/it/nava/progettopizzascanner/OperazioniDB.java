@@ -15,22 +15,33 @@ import java.net.URISyntaxException;
 
 public class OperazioniDB extends AsyncTask<String, String, String> {
     private String risultato;
+    private int op;
 
-    public OperazioniDB() {
+    public OperazioniDB(int op) {
         risultato = "";
+        this.op = op;
     }
 
     @Override
     protected String doInBackground(String... arg0) {
-            String codice = arg0[0];
-            String link = "http://progettopizza.altervista.org/confermaOrdine.php?codice=" + codice;
-            risultato = richiestaHttp(link);
-            return risultato;
+        String link;
+        switch (op) {
+            case 0: // Lettura dei prodotti
+                link = "http://progettopizza.altervista.org/leggiMenu.php?categoria=tutto";
+                risultato = richiestaHttp(link);
+                break;
+            case 1: // Conferma dell'ordine
+                String codice = arg0[0];
+                link = "http://progettopizza.altervista.org/confermaOrdine.php?codice=" + codice;
+                risultato = richiestaHttp(link);
+                break;
+        }
+        return risultato;
     }
 
     @Override
     protected void onPostExecute(String result) {
-         System.out.println("OperazioniDB: Comanda confermata con successo.");
+        System.out.println("OperazioniDB: Comanda confermata con successo.");
     }
 
     private String richiestaHttp(String link) {

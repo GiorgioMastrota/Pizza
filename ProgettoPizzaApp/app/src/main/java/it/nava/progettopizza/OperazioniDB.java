@@ -41,7 +41,7 @@ public class OperazioniDB extends AsyncTask<String, String, String> {
             String costoTot = arg0[2];
             String dataOra = arg0[3];
             String ordine = arg0[4];
-            String link = "http://progettopizza.altervista.org/aggiungiComanda.php?codice=" + codice + "&asporto=" + asporto
+            String link = "http://progettopizza.altervista.org/aggiungiOrdine.php?codice=" + codice + "&asporto=" + asporto
                     + "&costoTot=" + costoTot + "&dataOra=" + dataOra + "&ordine=" + ordine;
             risultato = richiestaHttp(link);
             return risultato;

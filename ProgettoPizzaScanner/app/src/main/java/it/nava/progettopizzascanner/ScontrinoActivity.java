@@ -16,6 +16,7 @@ public class ScontrinoActivity extends AppCompatActivity {
         final TextView textAsporto = (TextView)findViewById(R.id.textAsporto);
         final TextView textProdotti = (TextView)findViewById(R.id.textProdotti);
         final TextView textCosto = (TextView)findViewById(R.id.textCosto);
+        final TextView textPrezzo = (TextView)findViewById(R.id.textPrezzo);
 
         String stringaOrdine = getIntent().getStringExtra("stringaOrdine");
 
@@ -30,13 +31,17 @@ public class ScontrinoActivity extends AppCompatActivity {
             daAsporto = "No";
         textAsporto.setText("Da asporto: " + daAsporto);
 
-        String prodotti = "Prodotti ordinati: \n";
+        String prodotti = "Prodotti Ordinati: \n";
+        String prezzi = "Prezzo: \n";
         String[] prodottiOrdinati = parti[4].split(",");
         for (int i = 0; i < prodottiOrdinati.length; i++) {
-            prodotti += "- " + prodottiOrdinati[i] + "\n";
+            String prodotto = ListaProdotti.getNomeProdotto(Integer.parseInt(prodottiOrdinati[i]));
+            prodotti += "- " + prodotto + "\n";
+            Double prezzo = ListaProdotti.getPrezzoProdotto(Integer.parseInt(prodottiOrdinati[i]));
+            prezzi += String.format("%.2f", prezzo) + "€\n";
         }
-
         textProdotti.setText(prodotti);
-        textCosto.setText("Totale: " + parti[2] + "€");
+        textPrezzo.setText(prezzi);
+        textCosto.setText("Totale: " + String.format("%.2f", (Double.parseDouble(parti[2]) / 100)) + "€");
     }
 }

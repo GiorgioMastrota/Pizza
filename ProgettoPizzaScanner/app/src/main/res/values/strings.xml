@@ -2,4 +2,6 @@
     <string name="app_name">Pizzeria - Scanner</string>
     <string name="strNomePizzeria">Pizzeria</string>
     <string name="strVia">Via IV Novembre, 52 - Mariano Comense (CO)</string>
+    <string name="strProdottiOrdinati">Prodotti ordinati:</string>
+    <string name="strPrezzo">Prezzo:</string>
 </resources>
