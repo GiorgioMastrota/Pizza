@@ -128,7 +128,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
             LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout.LayoutParams lpLL = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+                    LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             ll.setLayoutParams(lpLL);
 
             // Nome
