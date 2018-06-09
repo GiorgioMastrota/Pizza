@@ -128,7 +128,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
             LinearLayout ll = new LinearLayout(contesto);
             ll.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout.LayoutParams lpLL = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.setLayoutParams(lpLL);
 
             // Nome
@@ -138,7 +138,7 @@ public class ActivityRiepilogo extends AppCompatActivity {
                 nomeProdotto.setTypeface(null, Typeface.BOLD);
             nomeProdotto.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
             lpNome.setMargins(12, 0, 0, 0);
             nomeProdotto.setLayoutParams(lpNome);
             ll.addView(nomeProdotto);
@@ -150,10 +150,10 @@ public class ActivityRiepilogo extends AppCompatActivity {
                 if (i == -1)
                     prezzoProdotto.setTypeface(null, Typeface.BOLD);
                 LinearLayout.LayoutParams lpPrezzo = new LinearLayout.LayoutParams(
-                        (int) larghPB, LinearLayout.LayoutParams.MATCH_PARENT);
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 prezzoProdotto.setGravity(Gravity.CENTER);
-                lpNome.setMargins(0, 0, 0, 0);
-                nomeProdotto.setLayoutParams(lpPrezzo);
+                lpPrezzo.setMargins(0, 0, 30, 0);
+                prezzoProdotto.setLayoutParams(lpPrezzo);
                 ll.addView(prezzoProdotto);
 
                 // Bottone di rimozione
