@@ -2,14 +2,13 @@ package it.nava.progettopizzacomande;
 
 public class Prodotto {
 
-    int id, categoria;
+    int id;
     String nome, descrizione;
     double costo;
 
-    public Prodotto(int id, String nome, int categoria, String descrizione, double costo){
+    public Prodotto(int id, String nome, String descrizione, double costo){
         this.id = id;
         this.nome = nome;
-        this.categoria = categoria;
         this.descrizione = descrizione;
         this.costo = costo;
     }
@@ -22,10 +21,6 @@ public class Prodotto {
 
     public String getNome() {
         return nome;
-    }
-
-    public int getCategoria() {
-        return categoria;
     }
 
     public String getDescrizione() {

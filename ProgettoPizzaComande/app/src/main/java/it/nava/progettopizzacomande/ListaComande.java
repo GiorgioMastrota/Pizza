@@ -10,6 +10,7 @@ public class ListaComande {
 
     public ListaComande() {
         listaComande = new ArrayList<>();
+        inizializzaComande();
     }
 
     public void inizializzaComande(){
@@ -27,10 +28,29 @@ public class ListaComande {
             boolean asporto = false;
             if (valori[1].equals(1))
                 asporto = true;
-            String stringaOrdine = valori[2];
+            String[] prodottiOrdinati = valori[2].split(",");
+            String stringaOrdine = "";
+            for (int y = 0; y < prodottiOrdinati.length; y++){
+                if (y != 0){
+                    stringaOrdine += ", ";
+                }
+                stringaOrdine += ListaProdotti.getNomeProdotto(Integer.parseInt(prodottiOrdinati[y]));
+            }
             Comanda daAggiungere = new Comanda(codiceOrdine, asporto, stringaOrdine);
             aggiungiComanda(daAggiungere);
         }
+    }
+
+    public void soddisfaComanda(int idComanda){
+        Comanda daSoddisfare = getComanda(idComanda);
+        String codice = Integer.toString(daSoddisfare.getCodice());
+        OperazioniDB soddisfa = new OperazioniDB(1);
+        try {
+            soddisfa.execute(codice).get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("ListaComande: errore nel soddisfacimento della comanda.");
+        }
+        rimuoviComanda(idComanda);
     }
 
     // Get e Set
@@ -41,6 +61,10 @@ public class ListaComande {
 
     public void aggiungiComanda(Comanda comanda){
         listaComande.add(comanda);
+    }
+
+    public void rimuoviComanda(int idComanda){
+        listaComande.remove(idComanda);
     }
 
     public int getNumComande(){

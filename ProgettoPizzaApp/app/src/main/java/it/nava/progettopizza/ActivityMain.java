@@ -19,7 +19,7 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Pizzeria Ismail El Abiad");
+        setTitle("Pizzeria");
 
         linearPrincipale = (LinearLayout) findViewById(R.id.mainLayoutPrincipale);
 

@@ -35,7 +35,11 @@ public class OperazioniDB extends AsyncTask<String, String, String> {
                 break;
             case 1:
                 String idComanda = arg0[0];
-                link = "http://progettopizza.altervista.org/soddisfaComanda.php?id=" + idComanda;
+                link = "http://progettopizza.altervista.org/soddisfaComanda.php?codice=" + idComanda;
+                risultato = richiestaHttp(link);
+                break;
+            case 2:
+                link = "http://progettopizza.altervista.org/leggiMenu.php?categoria=tutto";
                 risultato = richiestaHttp(link);
                 break;
         }
