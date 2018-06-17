@@ -3,6 +3,7 @@ package it.nava.progettopizzacomande;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -17,17 +18,28 @@ public class MainActivity extends AppCompatActivity {
 
     private ListaComande listaComande;
 
+    Handler handler = new Handler();
+    Runnable ricarica;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListaProdotti.letturaProdotti();
-        listaComande = new ListaComande();
+        ricarica = new Runnable() {
+            @Override
+            public void run() {
+                final LinearLayout linearVerticale = (LinearLayout)findViewById(R.id.layVerticale);
+                linearVerticale.removeAllViews();
 
-        final LinearLayout linearVerticale = (LinearLayout)findViewById(R.id.layVerticale);
+                ListaProdotti.letturaProdotti();
+                listaComande = new ListaComande();
 
-        creaCampi(this, linearVerticale);
+                creaCampi(getApplicationContext(), linearVerticale);
+                handler.postDelayed(ricarica, 5000);
+            }
+        };
+        handler.post(ricarica);
     }
 
     public void creaCampi(Context contesto, LinearLayout layout) {
@@ -46,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             // Testo nessuna comanda
             TextView spazio = new TextView(contesto);
             spazio.setText("Nessuna comanda da visualizzare.");
+            spazio.setTextColor(Color.BLACK);
             spazio.setTypeface(null, Typeface.BOLD);
             spazio.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpNome = new LinearLayout.LayoutParams(
@@ -84,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             TextView comanda = new TextView(contesto);
             comanda.setText(strTesto);
             comanda.setTypeface(null, Typeface.BOLD);
+            comanda.setTextColor(Color.BLACK);
             LinearLayout.LayoutParams lpComanda = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
             lpComanda.setMargins(12, 12, 0, 12);
@@ -94,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             final Button btn = new Button(contesto);
             btn.setId(i);
             btn.setText("✓");
+            btn.setTextColor(Color.BLACK);
             btn.setTypeface(null, Typeface.BOLD);
             btn.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(

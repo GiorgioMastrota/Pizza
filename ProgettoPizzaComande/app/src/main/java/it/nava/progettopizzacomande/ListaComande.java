@@ -21,23 +21,25 @@ public class ListaComande {
         } catch (InterruptedException | ExecutionException e) {
             System.err.println("ListaComande: errore nella richiesta delle comande.");
         }
-        String[] comande = strComande.split(":");
-        for (int i = 0; i < comande.length; i++){
-            String[] valori = comande[i].split(";");
-            int codiceOrdine = Integer.parseInt(valori[0]);
-            boolean asporto = false;
-            if (valori[1].equals(1))
-                asporto = true;
-            String[] prodottiOrdinati = valori[2].split(",");
-            String stringaOrdine = "";
-            for (int y = 0; y < prodottiOrdinati.length; y++){
-                if (y != 0){
-                    stringaOrdine += ", ";
+        if (!strComande.equals("")) {
+            String[] comande = strComande.split(":");
+            for (int i = 0; i < comande.length; i++) {
+                String[] valori = comande[i].split(";");
+                int codiceOrdine = Integer.parseInt(valori[0]);
+                boolean asporto = false;
+                if (valori[1].equals(1))
+                    asporto = true;
+                String[] prodottiOrdinati = valori[2].split(",");
+                String stringaOrdine = "";
+                for (int y = 0; y < prodottiOrdinati.length; y++) {
+                    if (y != 0) {
+                        stringaOrdine += ", ";
+                    }
+                    stringaOrdine += ListaProdotti.getNomeProdotto(Integer.parseInt(prodottiOrdinati[y]));
                 }
-                stringaOrdine += ListaProdotti.getNomeProdotto(Integer.parseInt(prodottiOrdinati[y]));
+                Comanda daAggiungere = new Comanda(codiceOrdine, asporto, stringaOrdine);
+                aggiungiComanda(daAggiungere);
             }
-            Comanda daAggiungere = new Comanda(codiceOrdine, asporto, stringaOrdine);
-            aggiungiComanda(daAggiungere);
         }
     }
 
